@@ -102,6 +102,15 @@ export const StateContext = ({ children }) => {
         }
     }
 
+    const setProgressValue = (name, value) => {
+        let progressBars = {...playerData.progressBars}
+        progressBars[name]= value
+        setPlayerData((prevState) => ({
+            ...prevState,
+            progressBars: progressBars
+        }))
+        }
+
  
     const value = {
         playerData,
@@ -111,6 +120,7 @@ export const StateContext = ({ children }) => {
         removeLabour,
         addAdvancement,
         deleteAdvancement,
+        setProgressValue
       }
 
     return (

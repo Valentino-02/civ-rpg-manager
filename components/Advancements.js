@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useStateContext } from '../context'
+import ProgressBar from './ProgressBar'
 
 
 const AdvancmentField = ({ name, dsc, fieldName, handleDeleteAdvancement}) => {
@@ -50,25 +51,42 @@ const AdvancmentInput = ({ fieldName, handleAddAdvancement}) => {
 const Advancements = () => {
     const { playerData, addAdvancement, deleteAdvancement } = useStateContext()
     
-    const technologies = playerData.technologies
-    const beliefs = playerData.beliefs
-    const civics = playerData.civics
+    const technologies = playerData.technologies ? playerData.technologies : []
+    const beliefs = playerData.beliefs ? playerData.beliefs : []
+    const civics = playerData.civics ? playerData.civics : []
 
+    const techProgress = playerData.progressBars.science ? playerData.progressBars.science : 0
+    const techMaxValue =  playerData.technologies ? 10 + 3*playerData.technologies.length : 10
+    const beliefProgress = playerData.progressBars.religion ? playerData.progressBars.religion : 0
+    const beliefMaxValue =  playerData.beliefs ? 10 + 3*playerData.beliefs.length : 10
+    const civicProgress = playerData.progressBars.influence ? playerData.progressBars.influence : 0
+    const civicMaxValue =  playerData.civics ? 10 + 3*playerData.civics.length : 10
 
     return (<>
         <h1 className='font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8'>Technologies</h1>
+
+        <ProgressBar value={techProgress} maxValue={techMaxValue} />
+
         <AdvancmentInput fieldName={'technology'} handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
         {technologies.length !== 0 ? technologies.map((technology, index) => (
             <AdvancmentField key={index} fieldName={'technology'} name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />
         )) : null}
 
+
         <h1 className='font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8'>Beliefs</h1>
+
+        <ProgressBar value={beliefProgress} maxValue={beliefMaxValue} />
+
         <AdvancmentInput fieldName={'belief'} handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
         {beliefs.length !== 0 ? beliefs.map((technology, index) => (
             <AdvancmentField key={index} fieldName={'belief'} name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />
         )) : null}
 
+
         <h1 className='font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8'>Civics</h1>
+
+        <ProgressBar value={civicProgress} maxValue={civicMaxValue} />
+        
         <AdvancmentInput fieldName={'civic'} handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
         {civics.length !== 0 ? civics.map((technology, index) => (
             <AdvancmentField key={index} fieldName={'civic'} name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />

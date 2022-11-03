@@ -5,7 +5,7 @@ import { useStateContext } from '../context'
 const InfoBox = ({ name, value, handleAddPopulation, handleSubtractPopulation }) => {
 
     return (
-        <div className='p-2 relative flex border border-white border-solid'>
+        <div className='p-2 relative flex border border-white border-solid bg-sky-800'>
             <h1 className='sm:pr-4 select-none text-1xl sm:text-2xl'>
                 {name}
             </h1>
@@ -22,7 +22,7 @@ const InfoBox = ({ name, value, handleAddPopulation, handleSubtractPopulation })
 const DeletableInfoBox = ({ name, value, handleAddPopulation, handleSubtractPopulation, handleDeleteLabour }) => {
 
     return (
-        <div className='p-2 relative flex border border-white border-solid'>
+        <div className='p-2 relative flex border border-white border-solid bg-sky-900'>
             <h1 className='sm:pr-4 select-none text-1xl sm:text-2xl'>
                 {name}
             </h1>
@@ -53,7 +53,7 @@ const AddLabourBox = ({ handleAddLabour }) => {
     }
 
     return(
-        <div className='p-2 relative flex border border-white border-solid'>
+        <div className='p-2 relative flex border border-white border-solid '>
             <input type="text" value={labourName} onChange={(e) => handleLabourNameChange(e.target.value)} placeholder='Add Labour' className='bg-slate-700 text-white p-2 w-full max-w-[40ch]' />
             <i onClick={() => handleClickNewLabour()} className="fa-solid fa-file-circle-plus pt-1 pl-2 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i> 
         </div>                             
@@ -87,8 +87,8 @@ const PopulationDistribution = () => {
 
 
     return (<>
-        <div className='lg:mx-80 p-2  relative flex items-stretch border border-white border-solid '>
-            <h1 className='sm:pr-4 select-none text-1xl sm:text-2xl'>Idle Poulation</h1>
+        <div className='lg:mx-80 p-2  relative flex items-stretch border border-white border-solid'>
+            <h1 className='sm:pr-4 select-none text-1xl sm:text-2xl'>Idle Population</h1>
             <h1 className={'px-1 flex absolute right-2 sm:px-2 pt-1 text-xl select-none'}>{100 - count}</h1>
         </div>
         

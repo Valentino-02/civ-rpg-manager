@@ -2,6 +2,7 @@ import React from 'react'
 import useFetchPlayerData from '../hooks/useFetchPlayerData'
 import Advancements from './Advancements'
 import PopulationDistribution from './PopulationDistribution'
+import ProgressBars from './ProgressBars'
 
 const HomeMenu = () => {
     const { playerData } = useFetchPlayerData()
@@ -16,7 +17,11 @@ const HomeMenu = () => {
             <Advancements  />
         </div>
 
-        <div className='mx-5 md:mx-20 lg:mx-30 xl:mx-40 flex flex-col gap-2 sm:gap-4 mt-20' >
+        <div className='mx-5 md:mx-20 mt-10 lg:mx-30 xl:mx-40' >
+            <ProgressBars  />
+        </div>
+
+        <div className='mx-5 md:mx-20 lg:mx-30 xl:mx-40 sm:gap-4 mt-20 flex flex-col gap-2' >
             <PopulationDistribution  />
         </div>
 

@@ -2,11 +2,15 @@ import React from 'react'
 
 const ProgressBar = ({ value, maxValue, label='Progress Bar' }) => {
     const shouldAddNew = value >= maxValue
-    const progress = shouldAddNew ? 100 : (value/maxValue) * 100
+
+    const progress = 
+        shouldAddNew ? 100 : 
+        value < 0 ? 0 : 
+        (value/maxValue) * 100
     
 
     return (    
-        <div className="mb-2">
+        <div className="mb-2 flex-1">
             <div className="flex justify-between mb-1">
                 <span className="text-base font-medium text-white">{label}</span>
 

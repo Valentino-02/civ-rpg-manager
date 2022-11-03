@@ -102,14 +102,35 @@ export const StateContext = ({ children }) => {
         }
     }
 
-    const setProgressValue = (name, value) => {
+    const setProgressValue = (name, strValue, operation='') => {
+        let value = Number(strValue)
+        if (operation === 'add') {
+            let progressBars = {...playerData.progressBars}
+            let prevValue = progressBars[name]
+            progressBars[name]= value + prevValue
+            setPlayerData((prevState) => ({
+                ...prevState,
+                progressBars: progressBars
+            }))
+            return
+        }
+        if (operation === 'subtract') {
+            let progressBars = {...playerData.progressBars}
+            let prevValue = progressBars[name]
+            progressBars[name]= prevValue - value
+            setPlayerData((prevState) => ({
+                ...prevState,
+                progressBars: progressBars
+            }))
+            return
+        }
         let progressBars = {...playerData.progressBars}
         progressBars[name]= value
         setPlayerData((prevState) => ({
             ...prevState,
             progressBars: progressBars
         }))
-        }
+    }
 
  
     const value = {

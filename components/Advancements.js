@@ -48,8 +48,66 @@ const AdvancmentInput = ({ fieldName, handleAddAdvancement}) => {
 }
 
 
+const AddBtn = ({type, handleAddPoints}) => {
+    const [points,setpoints] = useState('')
+
+    const handlepointsChange = (value) => {
+        const e = Number(value)
+        if (isNaN(e)) {return}
+        setpoints(value)
+    }
+
+    const handleClickAddPoints = () => {
+        if (points === '') {return}
+        handleAddPoints(type, points)
+        setpoints('')
+    }
+
+    return(
+        <div className='p-2 flex-2  '>
+            <input type="text" value={points} onChange={(e) => handlepointsChange(e.target.value)} placeholder={'0'} className='bg-slate-700 text-white p-2 max-w-[4ch]' />
+            <i onClick={() => handleClickAddPoints()} className="fa-solid fa-plus pt-1 pl-2 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i> 
+        </div>                             
+    )
+}
+
+
+const SubtractBtn = ({type, handleSubtractPoints}) => {
+    const [points,setpoints] = useState('')
+
+    const handlepointsChange = (value) => {
+        const e = Number(value)
+        if (isNaN(e)) {return}
+        setpoints(value)
+    }
+
+    const handleClickAddPoints = () => {
+        if (points === '') {return}
+        handleSubtractPoints(type, points)
+        setpoints('')
+    }
+    
+    return(
+        <div className='p-2 flex-2  '>
+            <input type="text" value={points} onChange={(e) => handlepointsChange(e.target.value)} placeholder={'0'} className='bg-slate-700 text-white p-2 max-w-[4ch]' />
+            <i onClick={() => handleClickAddPoints()} className="fa-solid fa-minus pt-1 pl-2 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i> 
+        </div>                             
+    )
+}
+
+
+const AutoSubtractBtn = ({type, handleAutoSubtractPoints}) => {
+    
+    return(
+        <div className='p-2 flex-2  '>
+            <i onClick={() => handleAutoSubtractPoints(type)} className="fa-solid fa-square-minus pt-1 pl-2 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i> 
+        </div>           
+    )
+}
+
+
 const Advancements = () => {
-    const { playerData, addAdvancement, deleteAdvancement } = useStateContext()
+    const { playerData, addAdvancement, deleteAdvancement, setProgressValue } = useStateContext()
     
     const technologies = playerData.technologies ? playerData.technologies : []
     const beliefs = playerData.beliefs ? playerData.beliefs : []
@@ -64,9 +122,12 @@ const Advancements = () => {
 
     return (<>
         <h1 className='font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8'>Technologies</h1>
-
-        <ProgressBar value={techProgress} maxValue={techMaxValue} />
-
+        <div className='flex items-stretch gap-2'>
+            <ProgressBar value={techProgress} maxValue={techMaxValue} />
+            <AddBtn type={'science'} handleAddPoints={(type, value) => setProgressValue(type, value, 'add')} />
+            <SubtractBtn type={'science'} handleSubtractPoints={(type, value) => setProgressValue(type, value, 'subtract')} />
+            <AutoSubtractBtn type={'science'} handleAutoSubtractPoints={(type) => setProgressValue(type, techMaxValue, 'subtract')} />
+        </div>
         <AdvancmentInput fieldName={'technology'} handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
         {technologies.length !== 0 ? technologies.map((technology, index) => (
             <AdvancmentField key={index} fieldName={'technology'} name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />
@@ -74,9 +135,12 @@ const Advancements = () => {
 
 
         <h1 className='font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8'>Beliefs</h1>
-
-        <ProgressBar value={beliefProgress} maxValue={beliefMaxValue} />
-
+        <div className='flex items-stretch gap-2'>
+            <ProgressBar value={beliefProgress} maxValue={beliefMaxValue} />
+            <AddBtn type={'religion'} handleAddPoints={(type, value) => setProgressValue(type, value, 'add')} />
+            <SubtractBtn type={'religion'} handleSubtractPoints={(type, value) => setProgressValue(type, value, 'subtract')} />
+            <AutoSubtractBtn type={'religion'} handleAutoSubtractPoints={(type) => setProgressValue(type, beliefMaxValue, 'subtract')} />
+        </div>
         <AdvancmentInput fieldName={'belief'} handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
         {beliefs.length !== 0 ? beliefs.map((technology, index) => (
             <AdvancmentField key={index} fieldName={'belief'} name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />
@@ -84,8 +148,13 @@ const Advancements = () => {
 
 
         <h1 className='font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8'>Civics</h1>
+        <div className='flex items-stretch gap-2'>
+            <ProgressBar value={civicProgress} maxValue={civicMaxValue} />
+            <AddBtn type={'influence'} handleAddPoints={(type, value) => setProgressValue(type, value, 'add')} />
+            <SubtractBtn type={'influence'} handleSubtractPoints={(type, value) => setProgressValue(type, value, 'subtract')} />
+            <AutoSubtractBtn type={'influence'} handleAutoSubtractPoints={(type) => setProgressValue(type, beliefMaxValue, 'subtract')} />
+        </div>
 
-        <ProgressBar value={civicProgress} maxValue={civicMaxValue} />
         
         <AdvancmentInput fieldName={'civic'} handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
         {civics.length !== 0 ? civics.map((technology, index) => (

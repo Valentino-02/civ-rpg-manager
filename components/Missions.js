@@ -135,15 +135,42 @@ const AddSubtractBtn = ({ type, handleAddPoints, handleSubtractPoints }) => {
 }
 
 
-const AutoSubtractBtn = ({type, handleAutoSubtractPoints}) => {
-    
-    return(
-        <div className='p-2 flex-2  '>
-            <i onClick={() => handleAutoSubtractPoints(type)} className="fa-solid fa-square-minus pt-1 pl-2 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i> 
-        </div>           
-    )
+
+const MissionField = () => {
+
 }
 
+
+const MissionInput = ({ handleAddMission }) => {
+    const [name,setName] = useState('')
+    const [points,setPoints] = useState('')
+
+    const handleNameChange = (value) => {
+        if (value.length >= 30) {return}
+        setName(value)
+    }
+
+    const handlePointsChange = (value) => {
+        if (value.length >= 10) {return}
+        setPoints(value)
+    }
+
+    const handleAddAdvancementClick = () => {
+        if (name === '' || points === '') {return}
+        handleAddMission(name, points)
+        setName('')
+        setPoints('')
+    }
+
+    return(
+        <div className='flex items-stretch divide-x mb-5'>
+            <input type='text' placeholder={'Enter Mission Name'} value={name} onChange={(e) => handleNameChange(e.target.value)} className="outline-none p-3 text-base sm:text-lg text-white bg-slate-700 flex-2" />
+            <input type='text' placeholder={'Enter Time / Mission Points'} value={points} onChange={(e) => handlePointsChange(e.target.value)} className="outline-none p-3 text-base sm:text-lg text-white bg-slate-700 flex-1" />
+            <button onClick={() => handleAddAdvancementClick()} className='w-fit px-4 sm:px-6 py-2 sm:py-3 bg-slate-400 text-white font-medium text-base duration-300 hover:opacity-40'>ADD</button>
+        </div>
+    )
+}
+ 
 
 const Advancements = () => {
     const { playerData, addAdvancement, deleteAdvancement, setProgressValue } = useStateContext()
@@ -151,6 +178,7 @@ const Advancements = () => {
     const technologies = playerData.technologies ? playerData.technologies : []
     const beliefs = playerData.beliefs ? playerData.beliefs : []
     const civics = playerData.civics ? playerData.civics : []
+    const missions = playerData.missions ? playerData.missions : []
 
     const techProgress = playerData.progressBars.science ? playerData.progressBars.science : 0
     const techMaxValue =  playerData.technologies ? 10 + 3*playerData.technologies.length : 10
@@ -160,11 +188,16 @@ const Advancements = () => {
     const civicMaxValue =  playerData.civics ? 10 + 3*playerData.civics.length : 10
 
     return (<>
-        <h1 className='font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8'>Technologies</h1>
+        <h1 className='font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8'>Missions</h1>
+        <MissionInput />
+        {missions.length !== 0 ? missions.map((mission, index) => (
+            <MissionField key={index} fieldName={'technology'} name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />
+        )) : null}
+        
+        
         <div className='flex items-stretch gap-2'>
             <ProgressBar value={techProgress} maxValue={techMaxValue} />
             <AddSubtractBtn type={'science'} handleAddPoints={(type, value) => setProgressValue(type, value, 'add')} handleSubtractPoints={(type, value) => setProgressValue(type, value, 'subtract')}/>
-            <AutoSubtractBtn type={'science'} handleAutoSubtractPoints={(type) => setProgressValue(type, techMaxValue, 'subtract')} />
         </div>
         <AdvancmentInput fieldName={'technology'} handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
         {technologies.length !== 0 ? technologies.map((technology, index) => (
@@ -175,8 +208,7 @@ const Advancements = () => {
         <h1 className='font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8'>Beliefs</h1>
         <div className='flex items-stretch gap-2'>
             <ProgressBar value={beliefProgress} maxValue={beliefMaxValue} />
-            <AddSubtractBtn type={'religion'} handleAddPoints={(type, value) => setProgressValue(type, value, 'add')} handleSubtractPoints={(type, value) => setProgressValue(type, value, 'subtract')}/>
-            <AutoSubtractBtn type={'religion'} handleAutoSubtractPoints={(type) => setProgressValue(type, beliefMaxValue, 'subtract')} />
+            <AddSubtractBtn type={'religion'} handleAddPoints={(type, value) => setProgressValue(type, value, 'add')} handleSubtractPoints={(type, value) => setProgressValue(type, value, 'subtract')}/>      
         </div>
         <AdvancmentInput fieldName={'belief'} handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
         {beliefs.length !== 0 ? beliefs.map((technology, index) => (
@@ -188,7 +220,7 @@ const Advancements = () => {
         <div className='flex items-stretch gap-2'>
             <ProgressBar value={civicProgress} maxValue={civicMaxValue} />
             <AddSubtractBtn type={'influence'} handleAddPoints={(type, value) => setProgressValue(type, value, 'add')} handleSubtractPoints={(type, value) => setProgressValue(type, value, 'subtract')}/>
-            <AutoSubtractBtn type={'influence'} handleAutoSubtractPoints={(type) => setProgressValue(type, beliefMaxValue, 'subtract')} />
+
         </div>
 
         

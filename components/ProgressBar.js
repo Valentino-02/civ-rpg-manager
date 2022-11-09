@@ -12,12 +12,12 @@ const ProgressBar = ({ value, maxValue, label='Progress Bar' }) => {
     return (    
         <div className="mb-2 flex-1">
             <div className="flex justify-between mb-1">
-                <span className="text-base font-medium text-white">{label}</span>
+                <span className="text-base font-medium select-none text-white">{label}</span>
 
                 {shouldAddNew ? 
-                    <span className="text-sm font-medium text-cyan-400 ">{`${value}/${maxValue}`}</span>
+                    <span className="text-sm font-medium select-none text-cyan-400 ">{`${value}/${maxValue}`}</span>
                     : 
-                     <span className="text-sm font-medium text-rose-800">{`${value}/${maxValue}`}</span>
+                     <span className="text-sm font-medium select-none text-rose-800">{`${value}/${maxValue}`}</span>
                 }
 
             </div>

@@ -31,8 +31,7 @@ const AdvancmentInput = ({ fieldName, handleAddAdvancement}) => {
     }
 
     const handleAddAdvancementClick = () => {
-        if (name === '' || dsc === '') {return}
-        console.log('oiii')
+        if (name === '') {return}
         handleAddAdvancement(name, dsc, fieldName)
         setName('')
         setDsc('')
@@ -48,54 +47,6 @@ const AdvancmentInput = ({ fieldName, handleAddAdvancement}) => {
 }
 
 
-const AddBtn = ({type, handleAddPoints}) => {
-    const [points,setpoints] = useState('')
-
-    const handlepointsChange = (value) => {
-        const e = Number(value)
-        if (isNaN(e)) {return}
-        setpoints(value)
-    }
-
-    const handleClickAddPoints = () => {
-        if (points === '') {return}
-        handleAddPoints(type, points)
-        setpoints('')
-    }
-
-    return(
-        <div className='p-2 flex-2  '>
-            <input type="text" value={points} onChange={(e) => handlepointsChange(e.target.value)} placeholder={'0'} className='bg-slate-700 text-white p-2 max-w-[4ch]' />
-            <i onClick={() => handleClickAddPoints()} className="fa-solid fa-plus pt-1 pl-2 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i> 
-        </div>                             
-    )
-}
-
-
-const SubtractBtn = ({type, handleSubtractPoints}) => {
-    const [points,setpoints] = useState('')
-
-    const handlepointsChange = (value) => {
-        const e = Number(value)
-        if (isNaN(e)) {return}
-        setpoints(value)
-    }
-
-    const handleClickAddPoints = () => {
-        if (points === '') {return}
-        handleSubtractPoints(type, points)
-        setpoints('')
-    }
-    
-    return(
-        <div className='p-2 flex-2  '>
-            <input type="text" value={points} onChange={(e) => handlepointsChange(e.target.value)} placeholder={'0'} className='bg-slate-700 text-white p-2 max-w-[4ch]' />
-            <i onClick={() => handleClickAddPoints()} className="fa-solid fa-minus pt-1 pl-2 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i> 
-        </div>                             
-    )
-}
-
-
 const AddSubtractBtn = ({ type, handleAddPoints, handleSubtractPoints }) => {
     const [points,setpoints] = useState('')
 
@@ -106,9 +57,10 @@ const AddSubtractBtn = ({ type, handleAddPoints, handleSubtractPoints }) => {
     }
 
     const handleClickAddPoints = () => {
-        if (points !== '0') {
+        if (points !== '') {
             handleAddPoints(type, points)
             setpoints('') 
+            return
         }
         handleAddPoints(type, '1')
         setpoints('')   
@@ -116,9 +68,10 @@ const AddSubtractBtn = ({ type, handleAddPoints, handleSubtractPoints }) => {
     }
 
     const handleClickSubtractPoints = () => {
-        if (points !== '0') {
+        if (points !== '') {
             handleSubtractPoints(type, points)
             setpoints('')
+            return
         }
         handleSubtractPoints(type, '1')
         setpoints('')

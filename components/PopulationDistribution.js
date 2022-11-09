@@ -12,7 +12,7 @@ const InfoBox = ({ name, value, handleAddPopulation, handleSubtractPopulation })
             <div className='flex absolute right-2'>
                 <i onClick={() => handleAddPopulation(name, value)} className="fa-solid fa-plus pt-1 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i>
                 <h1 className={'px-1 sm:px-2 pt-1 text-xl select-none'} >{value}</h1>
-                <i onClick={() => handleSubtractPopulation(name, value) } className="fa-solid fa-minus pt-1 cursor-pointer text-xl duration-200 hover:text-rose-900"></i>
+                <i onClick={() => handleSubtractPopulation(name, value) } className="fa-solid fa-minus pt-1 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i>
             </div>
         </div>
     )
@@ -26,11 +26,11 @@ const DeletableInfoBox = ({ name, value, handleAddPopulation, handleSubtractPopu
             <h1 className='sm:pr-4 select-none text-1xl sm:text-2xl'>
                 {name}
             </h1>
-            <i onClick={() => handleDeleteLabour(name, value)} className="fa-solid fa-trash pt-1 cursor-pointer text-xl duration-200 hover:text-rose-600"></i>
+            <i onClick={() => handleDeleteLabour(name, value)} className="fa-solid fa-trash pt-1 cursor-pointer text-xl duration-200 hover:text-rose-500"></i>
             <div className='flex absolute right-2'>
                 <i onClick={() => handleAddPopulation(name, value, true)} className="fa-solid fa-plus pt-1 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i>
                 <h1 className={'px-1 sm:px-2 pt-1 text-xl select-none'} >{value}</h1>
-                <i onClick={() => handleSubtractPopulation(name, value, true) } className="fa-solid fa-minus pt-1 cursor-pointer text-xl duration-200 hover:text-rose-900"></i>
+                <i onClick={() => handleSubtractPopulation(name, value, true) } className="fa-solid fa-minus pt-1 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i>
             </div>
         </div>
     )

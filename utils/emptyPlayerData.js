@@ -39,6 +39,7 @@ const emptyPlayerData = {
     "extraFood": 0,
     "treasure": 0,
     "populationSize": "",
+    "extraNotes": [],
 }
 
 export default emptyPlayerData

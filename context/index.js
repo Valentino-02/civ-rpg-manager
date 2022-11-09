@@ -132,6 +132,92 @@ export const StateContext = ({ children }) => {
         }))
     }
 
+
+    const addMission = (name, maxPoints) => {
+        let missions = [...playerData.missions]
+        missions.push({ 'name': name, 'maxPoints': maxPoints, 'points': 0})
+        setPlayerData((prevState) => ({
+            ...prevState,
+            missions: missions
+        }))
+    }
+
+    const deleteMission = (name) => {
+        let missions = [...playerData.missions]
+        missions = missions.filter(item => item.name !== name)
+        setPlayerData((prevState) => ({
+            ...prevState,
+            missions: missions
+        }))
+    }
+
+    const setMissionProgress = (name, strPoints, operation='') => {
+        let points = Number(strPoints)
+        let missions = [...playerData.missions]
+        let index = missions.findIndex(mission => mission.name === name)
+        let mission = missions[index]
+        let prePoints = mission.points
+        if (operation === 'add') {
+            mission.points = points + prePoints
+        }
+        if (operation === 'subtract') {
+            mission.points = prePoints - points
+        }
+        missions[index] = mission
+        setPlayerData((prevState) => ({
+            ...prevState,
+            missions: missions
+        }))
+    }
+
+    const addResource = (name, dsc) => {
+        let resources = [...playerData.resources]
+        resources.push({ 'name': name, 'dsc': dsc})
+        setPlayerData((prevState) => ({
+            ...prevState,
+            resources: resources
+        }))
+    }
+
+    const deleteResource = (name) => {
+        let resources = [...playerData.resources]
+        resources = resources.filter(item => item.name !== name)
+        setPlayerData((prevState) => ({
+            ...prevState,
+            resources: resources
+        }))
+    }
+
+    const setFoodProgress = (strPoints, operation='') => {
+        let points = Number(strPoints)
+        let food = playerData.extraFood
+        if (operation === 'add') {
+            food = food + points
+        }
+        if (operation === 'subtract') {
+            food = food - points
+        }
+        setPlayerData((prevState) => ({
+            ...prevState,
+            extraFood: food
+        }))
+    }
+
+    const setPopulationProgress = (strPoints, operation='') => {
+        let points = Number(strPoints)
+        let population = playerData.populationSize
+        if (operation === 'add') {
+           population = population + points
+        }
+        if (operation === 'subtract') {
+            population = population - points
+        }
+        setPlayerData((prevState) => ({
+            ...prevState,
+            populationSize: population
+        }))
+    }
+
  
     const value = {
         playerData,
@@ -141,7 +227,14 @@ export const StateContext = ({ children }) => {
         removeLabour,
         addAdvancement,
         deleteAdvancement,
-        setProgressValue
+        setProgressValue,
+        addMission,
+        deleteMission,
+        setMissionProgress,
+        addResource,
+        deleteResource,
+        setFoodProgress,
+        setPopulationProgress,
       }
 
     return (

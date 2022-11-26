@@ -2,6 +2,7 @@ import React from 'react'
 import useFetchPlayerData from '../hooks/useFetchPlayerData'
 import Advancements from './Advancements'
 import ExtraFood from './extraFood'
+import ExtraText from './extraText'
 import Missions from './Missions'
 import PopulationDistribution from './PopulationDistribution'
 import Resources from './Resources'
@@ -33,14 +34,12 @@ const HomeMenu = () => {
         </div>
 
         <div className='mx-5 md:mx-20 lg:mx-30 xl:mx-40 sm:gap-4 mt-20 flex flex-col gap-2' >
-            <PopulationDistribution  />
+            <ExtraText />
         </div>
 
-   
-
-
-
-
+        <div className='mx-5 md:mx-20 lg:mx-30 xl:mx-40 sm:gap-4 mt-20 flex flex-col gap-2' >
+            <PopulationDistribution  />
+        </div>
 
     </>)
     }

@@ -218,6 +218,24 @@ export const StateContext = ({ children }) => {
         }))
     }
 
+    const addText = (name, dsc) => {
+        let extraNotes = [...playerData.extraNotes]
+        extraNotes.push({ 'name': name, 'dsc': dsc})
+        setPlayerData((prevState) => ({
+            ...prevState,
+            extraNotes: extraNotes
+        }))
+    }
+
+    const deleteText = (name) => {
+        let extraNotes = [...playerData.extraNotes]
+        extraNotes = extraNotes.filter(item => item.name !== name)
+        setPlayerData((prevState) => ({
+            ...prevState,
+            extraNotes: extraNotes
+        }))
+    }
+
  
     const value = {
         playerData,
@@ -235,6 +253,8 @@ export const StateContext = ({ children }) => {
         deleteResource,
         setFoodProgress,
         setPopulationProgress,
+        addText,
+        deleteText,
       }
 
     return (

@@ -82,7 +82,7 @@ const MissionInput = ({ handleAddMission }) => {
     return(
         <div className='flex items-stretch divide-x mb-5'>
             <input type='text' placeholder={'Enter Mission Name'} value={name} onChange={(e) => handleNameChange(e.target.value)} className="outline-none p-3 text-base sm:text-lg text-white bg-slate-700 flex-1" />
-            <input type='text' placeholder={'Enter Time / Mission Points'} value={points} onChange={(e) => handlePointsChange(e.target.value)} className="outline-none p-3 text-base sm:text-lg text-white bg-slate-700 flex-2" />
+            <input type='text' placeholder={'Enter Time / Mission Points'} value={points} onChange={(e) => handlePointsChange(e.target.value)} className="outline-none p-3 text-base sm:text-lg text-white bg-slate-700 flex-1" />
             <button onClick={() => handleAddAdvancementClick()} className='w-fit px-4 sm:px-6 py-2 sm:py-3 bg-slate-400 text-white font-medium text-base duration-300 hover:opacity-40'>ADD</button>
         </div>
     )

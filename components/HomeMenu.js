@@ -1,47 +1,36 @@
-import React from 'react'
-import useFetchPlayerData from '../hooks/useFetchPlayerData'
-import Advancements from './Advancements'
-import ExtraFood from './extraFood'
-import ExtraText from './extraText'
-import Missions from './Missions'
-import PopulationDistribution from './PopulationDistribution'
-import Resources from './Resources'
+import React from 'react';
+import useFetchPlayerData from '../hooks/useFetchPlayerData';
+import DivGeneral from '../tailwindComponents/DivGeneral';
+import DivTitle from '../tailwindComponents/DivTitle';
+import Advancements from './Advancements';
+import ComponentHeader from './ComponentHeader';
+import ExtraFood from './ExtraFood';
+import ExtraText from './ExtraText';
+import Missions from './Missions';
+import PopulationDistribution from './PopulationDistribution';
+import Resources from './Resources';
 
+function HomeMenu() {
+  const { playerData } = useFetchPlayerData();
 
-const HomeMenu = () => {
-    const { playerData } = useFetchPlayerData()
+  return (
+    <>
+      <DivTitle>
+        <h1 className="font-extrabold select-none text-2xl sm:text-4xl">{`Welcome ${playerData.playerName}`}</h1>
+        <h1 className="font-extrabold select-none text-1xl sm:text-3xl">{`Great leader of ${playerData.civName}`}</h1>
+      </DivTitle>
 
-    return (<>
-        <div className='my-10 text-xs sm:text-sm flex flex-col justify-center items-center gap-2 sm:gap-4'>
-            <h1 className='font-extrabold select-none text-2xl sm:text-4xl'>{'Welcome ' + playerData.playerName}</h1>
-            <h1 className='font-extrabold select-none text-1xl sm:text-3xl'>{'Great leader of ' + playerData.civName}</h1>
-        </div>
+      <DivGeneral>
+        <ComponentHeader name={'Missions'} component={<Missions/>}  />
+        <Advancements />
+        <Missions />
+        <Resources />
+        <ExtraFood />
+        <ExtraText />
+        <PopulationDistribution />
+      </DivGeneral>
+    </>
+  );
+}
 
-        <div className='mx-5 md:mx-20 mt-10 lg:mx-30 xl:mx-40' >
-            <Advancements  />
-        </div>
-
-        <div className='mx-5 md:mx-20 lg:mx-30 xl:mx-40 sm:gap-4 mt-20 flex flex-col gap-2' >
-            <Missions />
-        </div>
-
-        <div className='mx-5 md:mx-20 lg:mx-30 xl:mx-40 sm:gap-4 mt-20 flex flex-col gap-2' >
-            <Resources  />
-        </div>
-
-        <div className='mx-5 md:mx-20 lg:mx-30 xl:mx-40 sm:gap-4 mt-20 flex flex-col gap-2' >
-            <ExtraFood  />
-        </div>
-
-        <div className='mx-5 md:mx-20 lg:mx-30 xl:mx-40 sm:gap-4 mt-20 flex flex-col gap-2' >
-            <ExtraText />
-        </div>
-
-        <div className='mx-5 md:mx-20 lg:mx-30 xl:mx-40 sm:gap-4 mt-20 flex flex-col gap-2' >
-            <PopulationDistribution  />
-        </div>
-
-    </>)
-    }
-
-export default HomeMenu
+export default HomeMenu;

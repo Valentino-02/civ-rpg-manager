@@ -117,9 +117,9 @@ function Advancements() {
           <AddSubtractBtn type="science" handleAddPoints={(type, value) => setProgressValue(type, value, 'add')} handleSubtractPoints={(type, value) => setProgressValue(type, value, 'subtract')} />
           <AutoSubtractBtn type="science" handleAutoSubtractPoints={(type) => setProgressValue(type, techMaxValue, 'subtract')} />
         </div>
-        <AdvancmentInput fieldName="technology" handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
+        <AdvancmentInput fieldName="technologies" handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
         {technologies.length !== 0 ? technologies.map((technology, index) => (
-        <AdvancmentField key={index} fieldName="technology" name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />
+        <AdvancmentField key={index} fieldName="technologies" name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />
         )) : null}
       </>
       <h1 className="font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8">Beliefs</h1>
@@ -128,9 +128,9 @@ function Advancements() {
         <AddSubtractBtn type="religion" handleAddPoints={(type, value) => setProgressValue(type, value, 'add')} handleSubtractPoints={(type, value) => setProgressValue(type, value, 'subtract')} />
         <AutoSubtractBtn type="religion" handleAutoSubtractPoints={(type) => setProgressValue(type, beliefMaxValue, 'subtract')} />
       </div>
-      <AdvancmentInput fieldName="belief" handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
+      <AdvancmentInput fieldName="beliefs" handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
       {beliefs.length !== 0 ? beliefs.map((technology, index) => (
-        <AdvancmentField key={index} fieldName="belief" name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />
+        <AdvancmentField key={index} fieldName="beliefs" name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />
       )) : null}
 
       <h1 className="font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8">Civics</h1>
@@ -140,9 +140,9 @@ function Advancements() {
         <AutoSubtractBtn type="influence" handleAutoSubtractPoints={(type) => setProgressValue(type, beliefMaxValue, 'subtract')} />
       </div>
 
-      <AdvancmentInput fieldName="civic" handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
+      <AdvancmentInput fieldName="civics" handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
       {civics.length !== 0 ? civics.map((technology, index) => (
-        <AdvancmentField key={index} fieldName="civic" name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />
+        <AdvancmentField key={index} fieldName="civics" name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />
       )) : null}
 
     </>

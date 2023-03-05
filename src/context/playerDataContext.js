@@ -26,80 +26,43 @@ export const PlayerDataContext = ({ children }) => {
     }
     }
 
+    const addPlayerValue = (name, propertyType) => {
+        let values = [...playerData[propertyType]]
+        values.push({ 'name': name, 'value': 0 })
+        setPlayerData((prevState) => ({
+            ...prevState,
+            [propertyType]: values
+        }))
+    }
+    
+    const removePlayerValue = (name, propertyType) => {
+        let values = [...playerData[propertyType]]
+        values = values.filter(item => item.name !== name)
+        setPlayerData((prevState) => ({
+            ...prevState,
+            [propertyType]: values
+        }))
+    }
+
     const addLabour = (name) => {
-    let extraLabours = [...playerData.extraLabourDistributions]
-    extraLabours.push({ 'name': name, 'value': 0 })
-    setPlayerData((prevState) => ({
-        ...prevState,
-        extraLabourDistributions: extraLabours
-    }))
+        addPlayerValue(name, 'extraLabourDistributions')
     }
 
     const removeLabour = (name) => {
-    let extraLabours = [...playerData.extraLabourDistributions]
-    extraLabours = extraLabours.filter(item => item.name !== name)
-    setPlayerData((prevState) => ({
-        ...prevState,
-        extraLabourDistributions: extraLabours
-    }))
+        removePlayerValue(name, 'extraLabourDistributions')
     }
 
     const addAdvancement = (name, dsc, type) => {
-        switch (type) {
-            case 'technology':
-                let techs = [...playerData.technologies]
+                let techs = [...playerData[type]]
                 techs.push({ 'name': name, 'dsc': dsc})
                 setPlayerData((prevState) => ({
                     ...prevState,
-                    technologies: techs
+                    [type]: techs
                 }))
-                break
-            case 'belief':
-                let beliefs = [...playerData.beliefs]
-                beliefs.push({ 'name': name, 'dsc': dsc})
-                setPlayerData((prevState) => ({
-                    ...prevState,
-                    beliefs: beliefs
-                }))
-                break
-            case 'civic':
-                let civics = [...playerData.civics]
-                civics.push({ 'name': name, 'dsc': dsc})
-                setPlayerData((prevState) => ({
-                    ...prevState,
-                    civics: civics
-                }))
-                break
-        }
     }
 
     const deleteAdvancement = (name, type) => {
-        switch (type) {
-            case 'technology':
-                let techs = [...playerData.technologies]
-                techs = techs.filter(item => item.name !== name)
-                setPlayerData((prevState) => ({
-                    ...prevState,
-                    technologies: techs
-                }))
-                break
-            case 'belief':
-                let beliefs = [...playerData.beliefs]
-                beliefs = beliefs.filter(item => item.name !== name)
-                setPlayerData((prevState) => ({
-                    ...prevState,
-                    beliefs: beliefs
-                }))
-                break
-            case 'civic':
-                let civics = [...playerData.civics]
-                civics = civics.filter(item => item.name !== name)
-                setPlayerData((prevState) => ({
-                    ...prevState,
-                    civics: civics
-                }))
-                break
-        }
+        removePlayerValue(name, type)
     }
 
     const setProgressValue = (name, strValue, operation='') => {

@@ -20,8 +20,7 @@ function HomeMenu() {
       </div>
 
     <CenterChildrenDiv>
-      <SectionHeader name={'Missions'} component={<Missions/>}  />
-      <Advancements />
+      <SectionHeader name={'Advancements'} component={<Advancements/>}  />
       <Missions />
       <Resources />
       <ExtraFood />

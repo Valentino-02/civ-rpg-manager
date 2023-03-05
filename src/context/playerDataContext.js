@@ -3,7 +3,7 @@ import emptyPlayerData from '../utils/emptyPlayerData';
 
 const Context = createContext();
 
-export const StateContext = ({ children }) => {
+export const PlayerDataContext = ({ children }) => {
     const [ playerData, setPlayerData ] = useState(emptyPlayerData)
 
     const setLabourValue = (name, value, isExtra) => {
@@ -264,4 +264,4 @@ export const StateContext = ({ children }) => {
     )
 }
 
-export const useStateContext = () => useContext(Context)
+export const usePlayerDataContext = () => useContext(Context)

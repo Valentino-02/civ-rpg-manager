@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useStateContext } from '../../context';
+import { usePlayerDataContext } from '../../context/playerDataContext';
 import ProgressBar from '../GeneralUse/ProgressBar';
+
 
 function AdvancmentField({
   name, dsc, fieldName, handleDeleteAdvancement,
@@ -94,7 +95,7 @@ function AutoSubtractBtn({ type, handleAutoSubtractPoints }) {
 function Advancements() {
   const {
     playerData, addAdvancement, deleteAdvancement, setProgressValue,
-  } = useStateContext();
+  } = usePlayerDataContext();
 
   const technologies = playerData.technologies ? playerData.technologies : [];
   const beliefs = playerData.beliefs ? playerData.beliefs : [];

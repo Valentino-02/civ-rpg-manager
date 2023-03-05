@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/authContext';
 import { db } from '../../firebase';
 import emptyPlayerData from '../utils/emptyPlayerData';
-import { useStateContext } from '../context';
+import { usePlayerDataContext } from '../context/playerDataContext';
 
 export default function useFetchPlayerData() {
-  const { playerData, setPlayerData } = useStateContext();
+  const { playerData, setPlayerData } = usePlayerDataContext();
 
   const { user } = useAuth();
 

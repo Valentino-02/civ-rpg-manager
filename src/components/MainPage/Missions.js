@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useStateContext } from '../../context'
+import { usePlayerDataContext } from '../../context/playerDataContext'
 import ProgressBar from '../GeneralUse/ProgressBar'
 
 
@@ -90,7 +90,7 @@ const MissionInput = ({ handleAddMission }) => {
  
 
 const Missions = () => {
-    const { playerData, addMission, deleteMission, setMissionProgress } = useStateContext()
+    const { playerData, addMission, deleteMission, setMissionProgress } = usePlayerDataContext()
     
     const missions = playerData.missions ? playerData.missions : []
 

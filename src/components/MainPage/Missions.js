@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useStateContext } from '../context'
-import ProgressBar from './ProgressBar'
+import { useStateContext } from '../../context'
+import ProgressBar from '../GeneralUse/ProgressBar'
 
 
 const AddSubtractBtn = ({ handleAddPoints, handleSubtractPoints }) => {

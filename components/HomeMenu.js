@@ -21,8 +21,7 @@ function HomeMenu() {
       </DivTitle>
 
       <DivGeneral>
-        <ComponentHeader name={'Missions'} component={<Missions/>}  />
-        <Advancements />
+        <ComponentHeader name={'Advancements'} component={<Advancements/>}  />
         <Missions />
         <Resources />
         <ExtraFood />

@@ -109,17 +109,18 @@ function Advancements() {
 
   return (
     <>
-        <>
-          <div className="flex items-stretch gap-2">
-            <ProgressBar value={techProgress} maxValue={techMaxValue} />
-            <AddSubtractBtn type="science" handleAddPoints={(type, value) => setProgressValue(type, value, 'add')} handleSubtractPoints={(type, value) => setProgressValue(type, value, 'subtract')} />
-            <AutoSubtractBtn type="science" handleAutoSubtractPoints={(type) => setProgressValue(type, techMaxValue, 'subtract')} />
-          </div>
-          <AdvancmentInput fieldName="technology" handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
-          {technologies.length !== 0 ? technologies.map((technology, index) => (
-            <AdvancmentField key={index} fieldName="technology" name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />
-          )) : null}
-        </>
+      <>
+        <h1 className="font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8">Techs</h1>
+        <div className="flex items-stretch gap-2">
+          <ProgressBar value={techProgress} maxValue={techMaxValue} />
+          <AddSubtractBtn type="science" handleAddPoints={(type, value) => setProgressValue(type, value, 'add')} handleSubtractPoints={(type, value) => setProgressValue(type, value, 'subtract')} />
+          <AutoSubtractBtn type="science" handleAutoSubtractPoints={(type) => setProgressValue(type, techMaxValue, 'subtract')} />
+        </div>
+        <AdvancmentInput fieldName="technology" handleAddAdvancement={(name, dsc, fieldName) => addAdvancement(name, dsc, fieldName)} />
+        {technologies.length !== 0 ? technologies.map((technology, index) => (
+        <AdvancmentField key={index} fieldName="technology" name={technology.name} dsc={technology.dsc} handleDeleteAdvancement={(name, fieldName) => deleteAdvancement(name, fieldName)} />
+        )) : null}
+      </>
       <h1 className="font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8">Beliefs</h1>
       <div className="flex items-stretch gap-2">
         <ProgressBar value={beliefProgress} maxValue={beliefMaxValue} />

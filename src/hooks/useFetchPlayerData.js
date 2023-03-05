@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
-import { db } from '../firebase';
+import { db } from '../../firebase';
 import emptyPlayerData from '../utils/emptyPlayerData';
 import { useStateContext } from '../context';
 

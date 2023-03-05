@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { useAuth } from '../context/AuthContext';
-import { db } from '../firebase';
-import emptyPlayerData from '../utils/emptyPlayerData';
-import { useStateContext } from '../context';
+import { useAuth } from '../../context/AuthContext';
+import { db } from '../../../firebase';
+import emptyPlayerData from '../../utils/emptyPlayerData';
+import { useStateContext } from '../../context';
 
 function Login() {
   const { playerData } = useStateContext();

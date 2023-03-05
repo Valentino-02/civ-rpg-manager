@@ -1,33 +1,33 @@
 import React from 'react';
-import useFetchPlayerData from '../hooks/useFetchPlayerData';
-import DivGeneral from '../tailwindComponents/DivGeneral';
-import DivTitle from '../tailwindComponents/DivTitle';
+import useFetchPlayerData from '../../hooks/useFetchPlayerData';
 import Advancements from './Advancements';
-import ComponentHeader from './ComponentHeader';
+import SectionHeader from '../GeneralUse/SectionHeader';
 import ExtraFood from './ExtraFood';
 import ExtraText from './ExtraText';
 import Missions from './Missions';
 import PopulationDistribution from './PopulationDistribution';
 import Resources from './Resources';
+import CenterChildrenDiv from '../StyleGivers/CenterChildrenDiv';
 
 function HomeMenu() {
   const { playerData } = useFetchPlayerData();
 
   return (
     <>
-      <DivTitle>
+      <div className="my-10 text-xs sm:text-sm flex flex-col justify-center items-center gap-2 sm:gap-4">
         <h1 className="font-extrabold select-none text-2xl sm:text-4xl">{`Welcome ${playerData.playerName}`}</h1>
         <h1 className="font-extrabold select-none text-1xl sm:text-3xl">{`Great leader of ${playerData.civName}`}</h1>
-      </DivTitle>
+      </div>
 
-      <DivGeneral>
-        <ComponentHeader name={'Advancements'} component={<Advancements/>}  />
-        <Missions />
-        <Resources />
-        <ExtraFood />
-        <ExtraText />
-        <PopulationDistribution />
-      </DivGeneral>
+    <CenterChildrenDiv>
+      <SectionHeader name={'Missions'} component={<Missions/>}  />
+      <Advancements />
+      <Missions />
+      <Resources />
+      <ExtraFood />
+      <ExtraText />
+      <PopulationDistribution />
+    </CenterChildrenDiv>
     </>
   );
 }

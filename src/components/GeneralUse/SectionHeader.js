@@ -1,7 +1,7 @@
 import React, { Children } from 'react'
 import { useState } from 'react'
 
-const ComponentHeader = ({component, name}) => {
+const SectionHeader = ({component, name}) => {
 
   const [showElement, setShowElement] = useState(true)
 
@@ -18,4 +18,4 @@ const ComponentHeader = ({component, name}) => {
 
 
 
-export default ComponentHeader 
+export default SectionHeader

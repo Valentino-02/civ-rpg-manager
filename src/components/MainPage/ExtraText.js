@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useStateContext } from '../context'
+import { useStateContext } from '../../context'
 
 
 const ResourceInput = ({ handleAddResource}) => {

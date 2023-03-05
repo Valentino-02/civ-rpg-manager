@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { doc, setDoc } from 'firebase/firestore';
-import { useAuth } from '../../context/AuthContext';
-import { useStateContext } from '../../context';
+import { useAuth } from '../../context/authContext';
+import { usePlayerDataContext } from '../../context/playerDataContext';
 import { db } from '../../../firebase';
-import { ToastContainer, toast } from 'react-toastify'
+import showMessage from '../../utils/showMessage';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Header() {
   const { user } = useAuth();
-  const { playerData } = useStateContext();
+  const { playerData } = usePlayerDataContext();
 
   const handleSave = () => {
     savePlayerData(user.uid);
@@ -18,7 +19,7 @@ export default function Header() {
     const playerRef = doc(db, 'players', uid);
     await setDoc(playerRef, {
       ...playerData,
-    }, { merge: true }).then(() => toast('holi')).catch(() => toast('puto'));
+    }, { merge: true }).then(() => showMessage('holi')).catch(() => showMessage('puto'));
   }
 
   return (
@@ -30,7 +31,6 @@ export default function Header() {
           <i onClick={() => handleSave()} className="fa-solid fa-floppy-disk cursor-pointer text-xl transition duration-500 hover:text-cyan-300 sm:text-3xl" />
         </div>}
       </div>
-      <ToastContainer />
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useStateContext } from '../../context'
+import { usePlayerDataContext } from '../../context/playerDataContext'
 
 
 const ResourceInput = ({ handleAddResource}) => {
@@ -47,7 +47,7 @@ const ResourceField = ({ name, dsc, handleDeleteResource}) => {
 
 
 const Resources = () => {
-    const { playerData, addResource, deleteResource } = useStateContext()
+    const { playerData, addResource, deleteResource } = usePlayerDataContext()
     
     const resources = playerData.resources ? playerData.resources : []
 

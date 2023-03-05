@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/authContext';
 import { db } from '../../../firebase';
 import emptyPlayerData from '../../utils/emptyPlayerData';
-import { useStateContext } from '../../context';
+import { usePlayerDataContext } from '../../context/playerDataContext';
 
 function Login() {
-  const { playerData } = useStateContext();
+  const { playerData } = usePlayerDataContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [playerName, setPlayerName] = useState('');

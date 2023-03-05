@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import HomeMenu from '../components/MainPage/HomeMenu'
 import Login from '../components/MainPage/Login'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/authContext'
 
 
 export default function Home() {

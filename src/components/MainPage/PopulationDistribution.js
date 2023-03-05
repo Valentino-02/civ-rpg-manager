@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useStateContext } from '../../context'
+import { usePlayerDataContext } from '../../context/playerDataContext'
 
 
 const InfoBox = ({ name, value, handleAddPopulation, handleSubtractPopulation }) => {
@@ -62,7 +62,7 @@ const AddLabourBox = ({ handleAddLabour }) => {
 
 
 const PopulationDistribution = () => {
-    const { playerData, setLabourValue, addLabour, removeLabour } = useStateContext()
+    const { playerData, setLabourValue, addLabour, removeLabour } = usePlayerDataContext()
     const [count, setCount] = useState(100)
 
     const labours = playerData.labourDistributions ? playerData.labourDistributions : []

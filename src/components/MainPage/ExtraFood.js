@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useStateContext } from '../../context'
+import { usePlayerDataContext } from '../../context/playerDataContext'
 import ProgressBar from '../GeneralUse/ProgressBar'
 
 const AddSubtractBtn = ({ handleAddPoints, handleSubtractPoints, handleAutoSubtractPoints }) => {
@@ -64,7 +64,7 @@ const PopulationBar = ({ points, maxPoints, handlePopulationProgress}) => {
 }
 
 const ExtraFood = () => {
-    const { playerData, setFoodProgress, setPopulationProgress } = useStateContext()
+    const { playerData, setFoodProgress, setPopulationProgress } = usePlayerDataContext()
     
     const extraFood = playerData.extraFood ? playerData.extraFood : 0
     const populationSize = playerData.populationSize ? playerData.populationSize: 0

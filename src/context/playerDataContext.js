@@ -6,63 +6,56 @@ const Context = createContext();
 export const PlayerDataContext = ({ children }) => {
     const [ playerData, setPlayerData ] = useState(emptyPlayerData)
 
-    const setLabourValue = (name, value, isExtra) => {
-    if (isExtra) {
-        let extraLabours = [...playerData.extraLabourDistributions]
-        let index = extraLabours.findIndex((labour) => labour.name === name)
-        extraLabours[index] = { 'name': name, 'value': value  }
+    const addPlayerValue = (propertyName, propertyValue) => {
+        let values = [...playerData[propertyName]]
+        values.push(propertyValue)
         setPlayerData((prevState) => ({
             ...prevState,
-            extraLabourDistributions: extraLabours
-        }))
-    } else {
-        let labours = [...playerData.labourDistributions]
-        let index = labours.findIndex((labour) => labour.name === name)
-        labours[index] = { 'name': name, 'value': value  }
-        setPlayerData((prevState) => ({
-            ...prevState,
-            labourDistributions: labours
-        }))
-    }
-    }
-
-    const addPlayerValue = (name, propertyType) => {
-        let values = [...playerData[propertyType]]
-        values.push({ 'name': name, 'value': 0 })
-        setPlayerData((prevState) => ({
-            ...prevState,
-            [propertyType]: values
+            [propertyName]: values
         }))
     }
     
-    const removePlayerValue = (name, propertyType) => {
-        let values = [...playerData[propertyType]]
+    const removePlayerValue = (propertyName, name) => {
+        let values = [...playerData[propertyName]]
         values = values.filter(item => item.name !== name)
         setPlayerData((prevState) => ({
             ...prevState,
-            [propertyType]: values
+            [propertyName]: values
+        }))
+    }
+    
+    const changePlayerValue = (propertyName, name, newValue) => {
+        let playerPropertyValues = [...playerData[propertyName]]
+        let index = playerPropertyValues.findIndex((item) => item.name === name)
+        playerPropertyValues[index] = newValue
+        setPlayerData((prevState) => ({
+            ...prevState,
+            [propertyName]: playerPropertyValues
         }))
     }
 
     const addLabour = (name) => {
-        addPlayerValue(name, 'extraLabourDistributions')
+        addPlayerValue('extraLabourDistributions', {'name': name, 'value': 0})
     }
 
     const removeLabour = (name) => {
-        removePlayerValue(name, 'extraLabourDistributions')
+        removePlayerValue('extraLabourDistributions', name)
+    }
+
+    const setLabourValue = (name, value, isExtra) => {
+        if (isExtra) {
+        changePlayerValue('extraLabourDistributions', name, {'name': name, 'value': value})
+        } else {
+        changePlayerValue('labourDistributions', name, {'name': name, 'value': value})
+        }
     }
 
     const addAdvancement = (name, dsc, type) => {
-                let techs = [...playerData[type]]
-                techs.push({ 'name': name, 'dsc': dsc})
-                setPlayerData((prevState) => ({
-                    ...prevState,
-                    [type]: techs
-                }))
+        addPlayerValue(type, {'name': name, 'dsc': dsc})
     }
 
     const deleteAdvancement = (name, type) => {
-        removePlayerValue(name, type)
+        removePlayerValue(type, name)
     }
 
     const setProgressValue = (name, strValue, operation='') => {
@@ -97,21 +90,11 @@ export const PlayerDataContext = ({ children }) => {
 
 
     const addMission = (name, maxPoints) => {
-        let missions = [...playerData.missions]
-        missions.push({ 'name': name, 'maxPoints': maxPoints, 'points': 0})
-        setPlayerData((prevState) => ({
-            ...prevState,
-            missions: missions
-        }))
+        addPlayerValue('missions', {'name': name, 'maxPoints': maxPoints, 'points': 0})
     }
 
     const deleteMission = (name) => {
-        let missions = [...playerData.missions]
-        missions = missions.filter(item => item.name !== name)
-        setPlayerData((prevState) => ({
-            ...prevState,
-            missions: missions
-        }))
+        removePlayerValue('missions', name)
     }
 
     const setMissionProgress = (name, strPoints, operation='') => {
@@ -134,21 +117,11 @@ export const PlayerDataContext = ({ children }) => {
     }
 
     const addResource = (name, dsc) => {
-        let resources = [...playerData.resources]
-        resources.push({ 'name': name, 'dsc': dsc})
-        setPlayerData((prevState) => ({
-            ...prevState,
-            resources: resources
-        }))
+        addPlayerValue('resources', {'name': name, 'dsc': dsc})
     }
 
     const deleteResource = (name) => {
-        let resources = [...playerData.resources]
-        resources = resources.filter(item => item.name !== name)
-        setPlayerData((prevState) => ({
-            ...prevState,
-            resources: resources
-        }))
+        removePlayerValue('resources', name)
     }
 
     const setFoodProgress = (strPoints, operation='') => {
@@ -182,21 +155,11 @@ export const PlayerDataContext = ({ children }) => {
     }
 
     const addText = (name, dsc) => {
-        let extraNotes = [...playerData.extraNotes]
-        extraNotes.push({ 'name': name, 'dsc': dsc})
-        setPlayerData((prevState) => ({
-            ...prevState,
-            extraNotes: extraNotes
-        }))
+        addPlayerValue('extraNotes', {'name': name, 'dsc': dsc})
     }
 
     const deleteText = (name) => {
-        let extraNotes = [...playerData.extraNotes]
-        extraNotes = extraNotes.filter(item => item.name !== name)
-        setPlayerData((prevState) => ({
-            ...prevState,
-            extraNotes: extraNotes
-        }))
+        removePlayerValue('extraNotes', name)
     }
 
  

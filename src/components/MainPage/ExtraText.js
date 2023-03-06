@@ -54,8 +54,8 @@ const ExtraText = () => {
     return (<>
         <h1 className='font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8'>Extra Text</h1>
         <ResourceInput  handleAddResource={(name, dsc) => addText(name, dsc)} />
-        {extraText.length !== 0 ? extraText.map((resource, index) => (
-            <ResourceField key={index} name={extraText.name} dsc={extraText.dsc} handleDeleteResource={(name) => deleteText(name)} />
+        {extraText.length !== 0 ? extraText.map((extraNote, index) => (
+            <ResourceField key={index} name={extraNote.name} dsc={extraNote.dsc} handleDeleteResource={(name) => deleteText(name)} />
         )) : null}
   </>)
 }

@@ -74,7 +74,7 @@ const PopulationDistribution = () => {
         setLabourValue(name, value + 5, isExtra)
     }
 
-    const handleSubtractPopulation = (name, value, isExtra) => {
+    const handleSubtractPopulation = (name, value) => {
         if (count <= 0 || value <= 0) {return}
         setCount(count - 5)
         setLabourValue(name, value - 5)

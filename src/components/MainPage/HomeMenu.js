@@ -3,7 +3,6 @@ import useFetchPlayerData from '../../hooks/useFetchPlayerData';
 import Advancements from './Advancements';
 import SectionHeader from '../GeneralUse/SectionHeader';
 import ExtraFood from './ExtraFood';
-import ExtraText from './ExtraText';
 import Missions from './Missions';
 import PopulationDistribution from './PopulationDistribution';
 import Resources from './Resources';
@@ -19,15 +18,13 @@ function HomeMenu() {
         <h1 className="font-extrabold select-none text-1xl sm:text-3xl">{`Great leader of ${playerData.civName}`}</h1>
       </div>
 
-    <CenterChildrenDiv>
-      <SectionHeader name={'Missions'} component={<Missions/>}  />
-      <Advancements />
-      <Missions />
-      <Resources />
-      <ExtraFood />
-      <ExtraText />
-      <PopulationDistribution />
-    </CenterChildrenDiv>
+      <CenterChildrenDiv>
+        <SectionHeader name={'Advancements'} component={<Advancements />}  />
+        <SectionHeader name={'Missions'} component={<Missions/>}  />
+        <SectionHeader name={'Reources'} component={<Resources />}  />
+        <SectionHeader name={'Extra Food'} component={<ExtraFood />}  />
+        <SectionHeader name={'Population Distribution'} component={<PopulationDistribution />}  />
+      </CenterChildrenDiv>
     </>
   );
 }

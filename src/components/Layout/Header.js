@@ -5,7 +5,6 @@ import { usePlayerDataContext } from '../../context/playerDataContext';
 import { db } from '../../../firebase';
 import showMessage from '../../utils/showMessage';
 
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function Header() {
   const { user } = useAuth();

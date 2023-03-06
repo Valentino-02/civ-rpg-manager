@@ -95,7 +95,6 @@ const Missions = () => {
     const missions = playerData.missions ? playerData.missions : []
 
     return (<>
-        <h1 className='font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8'>Missions</h1>
         <MissionInput handleAddMission={(name, maxPoints) => addMission(name, maxPoints)} />
         {missions.length !== 0 ? missions.map((mission, index) => (
             <MissionBar key={index} name={mission.name} points={mission.points} maxPoints={mission.maxPoints} handleDeleteMission={(name) => deleteMission(name)} handleMissionProgress={(name, value, operation) => setMissionProgress(name, value, operation)} />

@@ -53,7 +53,6 @@ const Resources = () => {
 
 
     return (<>
-        <h1 className='font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8'>Resources</h1>
         <ResourceInput  handleAddResource={(name, dsc) => addResource(name, dsc)} />
         {resources.length !== 0 ? resources.map((resource, index) => (
             <ResourceField key={index} name={resource.name} dsc={resource.dsc} handleDeleteResource={(name) => deleteResource(name)} />

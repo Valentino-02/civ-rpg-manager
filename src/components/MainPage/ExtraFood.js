@@ -72,7 +72,6 @@ const ExtraFood = () => {
     const maxPoints = 10 + (populationSize*5)
 
     return (<>
-        <h1 className='font-extrabold select-none text-2xl sm:text-4xl mb-2 mt-8'>Food and Population</h1>
         <FoodBar points={extraFood} maxPoints={maxPoints} handleFoodProgress={(value, operation) => setFoodProgress(value, operation)} />
         <PopulationBar points={populationSize} maxPoints={10} handlePopulationProgress={(value, operation) => setPopulationProgress(value, operation)} />
   </>)

@@ -1,45 +1,66 @@
 const emptyPlayerData = {
-    "playerName": "",
-    "civName": "",
-    // { "dsc": "", "name":"" }
-    "beliefs": [],
-    "civics": [],
-    "technologies": [],
-    "labourDistributions": [
+    "playerInfo" : {
+        "playerName": "",
+        "civName": "",
+    },
+    "knowledge" : {
+        "science" : {
+            "advancements": [],
+            "progress" : 0
+        },
+        "religion" : {
+            "advancements": [],
+            "progress" : 0
+        },
+        "civics" : {
+            "advancements": [],
+            "progress" : 0
+        },
+    },
+    "labourDistribution": [
         {
             "name": "food",
             "value": 50,
+            "isExtra": false,
         },
         {
-            "name": "influence",
+            "name": "civics",
             "value": 10,
+            "isExtra": false,
         },
         {
             "name": "military",
             "value": 10,
+            "isExtra": false,
         },
         {
             "name": "religion",
             "value": 10,
+            "isExtra": false,
         },
         {
             "name": "science",
             "value": 20,
+            "isExtra": false,
         },
     ],
-    "extraLabourDistributions": [],
-    // { "name": "", "progress":0 }
-    "missions": [],
-    "progressBars": {
-        "influence": 0,
-        "religion": 0,
-        "science": 0
+    "populationGrowth" : {
+        "progress": 0,
+        "populationSize": 0,
     },
-    "resources": [],
-    "extraFood": 0,
-    "treasure": 0,
-    "populationSize": "",
-    "extraNotes": [],
+    "missions": [
+/*         {
+            "name": "",
+            "progress": 0,
+            "maxProgress": 0,
+        } */
+    ],
+    "resources": [
+/*         {
+            "name": "",
+            "dsc": "",
+        } */
+    ],
 }
 
 export default emptyPlayerData

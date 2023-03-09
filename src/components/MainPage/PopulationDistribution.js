@@ -5,11 +5,11 @@ import { usePlayerDataContext } from '../../context/playerDataContext'
 const InfoBox = ({ name, value, handleAddPopulation, handleSubtractPopulation }) => {
 
     return (
-        <div className='p-2 relative flex border border-white border-solid bg-sky-800'>
-            <h1 className='sm:pr-4 select-none text-1xl sm:text-2xl'>
+        <div className='p-2 static flex border border-white border-solid bg-sky-800'>
+            <h1 className='flex-auto sm:pr-4 select-none text-1xl sm:text-2xl'>
                 {name}
             </h1>
-            <div className='flex absolute right-2'>
+            <div className='flex static right-2'>
                 <i onClick={() => handleAddPopulation(name, value)} className="fa-solid fa-plus pt-1 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i>
                 <h1 className={'px-1 sm:px-2 pt-1 text-xl select-none'} >{value}</h1>
                 <i onClick={() => handleSubtractPopulation(name, value) } className="fa-solid fa-minus pt-1 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i>
@@ -22,12 +22,12 @@ const InfoBox = ({ name, value, handleAddPopulation, handleSubtractPopulation })
 const DeletableInfoBox = ({ name, value, handleAddPopulation, handleSubtractPopulation, handleDeleteLabour }) => {
 
     return (
-        <div className='p-2 relative flex border border-white border-solid bg-sky-900'>
-            <h1 className='sm:pr-4 select-none text-1xl sm:text-2xl'>
+        <div className='p-2 static flex border border-white border-solid bg-sky-900'>
+            <h1 className='flex-auto sm:pr-4 select-none text-1xl sm:text-2xl'>
                 {name}
             </h1>
             <i onClick={() => handleDeleteLabour(name, value)} className="fa-solid fa-trash pt-1 cursor-pointer text-xl duration-200 hover:text-rose-500"></i>
-            <div className='flex absolute right-2'>
+            <div className='flex static right-2'>
                 <i onClick={() => handleAddPopulation(name, value, true)} className="fa-solid fa-plus pt-1 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i>
                 <h1 className={'px-1 sm:px-2 pt-1 text-xl select-none'} >{value}</h1>
                 <i onClick={() => handleSubtractPopulation(name, value, true) } className="fa-solid fa-minus pt-1 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i>
@@ -53,7 +53,7 @@ const AddLabourBox = ({ handleAddLabour }) => {
     }
 
     return(
-        <div className='p-2 relative flex border border-white border-solid '>
+        <div className='p-2 static flex border border-white border-solid'>
             <input type="text" value={labourName} onChange={(e) => handleLabourNameChange(e.target.value)} placeholder='Add Labour' className='bg-slate-700 text-white p-2 w-full max-w-[40ch]' />
             <i onClick={() => handleClickNewLabour()} className="fa-solid fa-file-circle-plus pt-1 pl-2 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i> 
         </div>                             
@@ -87,12 +87,12 @@ const PopulationDistribution = () => {
 
 
     return (<>
-        <div className='lg:mx-80 p-2  relative flex items-stretch border border-white border-solid'>
-            <h1 className='sm:pr-4 select-none text-1xl sm:text-2xl'>Idle Population</h1>
-            <h1 className={'px-1 flex absolute right-2 sm:px-2 pt-1 text-xl select-none'}>{100 - count}</h1>
+        <div className='lg:mx-80 p-2 static flex flex-row border border-white border-solid'>
+            <h1 className='flex-auto sm:pr-4 select-none text-1xl sm:text-2xl'>Idle Population</h1>
+            <h1 className={'px-1 right-2 sm:px-2 pt-1 text-xl select-none'}>{100 - count}</h1>
         </div>
         
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5  ">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
 
         {labours.length !== 0 ? labours.map((labour, index) => (
             <InfoBox key={index} name={labour.name} value={labour.value} handleAddPopulation={handleAddPopulation} handleSubtractPopulation={handleSubtractPopulation} />

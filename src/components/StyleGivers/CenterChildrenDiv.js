@@ -4,7 +4,7 @@ const CenterChildrenDiv = ({ children }) => {
   return (
     <>
       {children.map((elements, index) => (
-        <div key={index} className="mx-5 md:mx-20 lg:mx-30 xl:mx-40 sm:gap-4 mt-20 flex flex-col gap-2">
+        <div key={index} className="mb-12 mx-5 md:mx-20 lg:mx-20 xl:mx-20 sm:gap-4 flex flex-col gap-2">
           {elements}
         </div>
       ))}

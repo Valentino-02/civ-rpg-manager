@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { usePlayerDataContext } from '../../context/playerDataContext'
-import ProgressBar from '../GeneralUse/ProgressBar'
+import ProgressBar from '../GeneralUse/ProgressBars/ProgressBar'
 
 const AddSubtractBtn = ({ handleAddPoints, handleSubtractPoints, handleAutoSubtractPoints }) => {
     const [points,setpoints] = useState('')
@@ -30,11 +30,11 @@ const AddSubtractBtn = ({ handleAddPoints, handleSubtractPoints, handleAutoSubtr
     }
     
     return(
-        <div className='p-2 flex-2  '>
+        <div className='p-2 flex-2 '>
             <input type="text" value={points} onChange={(e) => handlepointsChange(e.target.value)} placeholder={'0'} className='bg-slate-700 text-white p-2 max-w-[4ch]' />
-            <i onClick={() => handleClickAddPoints()} className="fa-solid fa-plus pt-1 pl-2 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i> 
-            <i onClick={() => handleClickSubtractPoints()} className="fa-solid fa-minus pt-1 pl-2 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i> 
-            <i onClick={() => handleAutoSubtractPoints()} className="fa-solid fa-square-minus pt-1 pl-2 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i> 
+            <i onClick={() => handleClickAddPoints()} className="pt-1 pl-2 text-xl duration-200 cursor-pointer fa-solid fa-plus hover:text-cyan-300"></i> 
+            <i onClick={() => handleClickSubtractPoints()} className="pt-1 pl-2 text-xl duration-200 cursor-pointer fa-solid fa-minus hover:text-cyan-300"></i> 
+            <i onClick={() => handleAutoSubtractPoints()} className="pt-1 pl-2 text-xl duration-200 cursor-pointer fa-solid fa-square-minus hover:text-cyan-300"></i> 
         </div>                             
     )
 }

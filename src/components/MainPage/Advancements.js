@@ -2,10 +2,10 @@ import React from 'react';
 
 import { usePlayerDataContext } from '../../context/playerDataContext';
 
-import ProgressBarWithBtns from '../GeneralUse/ProgressBarWithBtns';
 import AddEntryInputField from '../GeneralUse/AddEntryInputField';
 import AddedEntry from '../GeneralUse/AddedEntry';
 import SectionHeader from '../GeneralUse/SectionHeader';
+import ProgBarFixedSubtract from '../GeneralUse/ProgressBars/ProgBarFixedSubtract';
 
 
 const Advancements = () => {
@@ -63,15 +63,34 @@ const Advancements = () => {
   );
 }
 
+const Technologies = () => {
+  const {
+    playerData, addAdvancement, deleteAdvancement, setProgressValue,
+  } = usePlayerDataContext();
+
+  const technologies = playerData.technologies ? playerData.technologies : [];
+  const techProgress = playerData.progressBars.science ? playerData.progressBars.science : 0;
+  const techMaxValue = playerData.technologies ? 10 + 3 * playerData.technologies.length : 10;
+
+  return (
+    <AdvancementEntryManager
+      advancementList={technologies}
+      type={'technology'}
+      value={techProgress}
+      maxValue={techMaxValue}
+      addAdvancement={addAdvancement}
+      deleteAdvancement={deleteAdvancement}
+      modifyAdvancementValue={setProgressValue} 
+    />
+  )
+}
+
 
 const AdvancementEntryManager = ({ advancementList, type, value, maxValue, addAdvancement, deleteAdvancement, modifyAdvancementValue }) => {
   return(
     <>
-      <ProgressBarWithBtns value={value} maxValue={maxValue} type={type} handleModifyValue={(type, value, operation) => modifyAdvancementValue(type, value, operation)} />
-      <AddEntryInputField type={type} handleAddEntry={(name, dsc, type) => {
-        console.log('addAdvanement', name, dsc, type)
-        addAdvancement(name, dsc, type)
-        }} />
+      <ProgBarFixedSubtract value={value} maxValue={maxValue} type={type} handleModifyValue={(type, value, operation) => modifyAdvancementValue(type, value, operation)} />
+      <AddEntryInputField type={type} handleAddEntry={(name, dsc, type) => addAdvancement(name, dsc, type)} />
       {advancementList.length !== 0 ? advancementList.map((advancement, index) => (
         <AddedEntry key={index} name={advancement.name} dsc={advancement.dsc} type={type} handleDeleteEntry={(name, fieldName) => deleteAdvancement(name, fieldName)} />
       )) : null}

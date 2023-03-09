@@ -1,47 +1,8 @@
 import React, { useState } from 'react'
 import { usePlayerDataContext } from '../../context/playerDataContext'
-import ProgressBar from '../GeneralUse/ProgressBar'
+import ProgressBar from '../GeneralUse/ProgressBars/ProgressBar'
 
 
-const AddSubtractBtn = ({ handleAddPoints, handleSubtractPoints }) => {
-    const [points,setpoints] = useState('')
-
-    const handlepointsChange = (value) => {
-        const e = Number(value)
-        if (isNaN(e)) {return}
-        setpoints(value)
-    }
-
-    const handleClickAddPoints = () => {
-        if (points !== '') {
-            handleAddPoints(points)
-            setpoints('') 
-            return
-        }
-        handleAddPoints('1')
-        setpoints('')   
-
-    }
-
-    const handleClickSubtractPoints = () => {
-        if (points !== '') {
-            handleSubtractPoints(points)
-            setpoints('')
-            return
-        }
-        handleSubtractPoints('1')
-        setpoints('')
-
-    }
-    
-    return(
-        <div className='p-2 flex-2  '>
-            <input type="text" value={points} onChange={(e) => handlepointsChange(e.target.value)} placeholder={'0'} className='bg-slate-700 text-white p-2 max-w-[4ch]' />
-            <i onClick={() => handleClickAddPoints()} className="fa-solid fa-plus pt-1 pl-2 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i> 
-            <i onClick={() => handleClickSubtractPoints()} className="fa-solid fa-minus pt-1 pl-2 cursor-pointer text-xl duration-200 hover:text-cyan-300"></i> 
-        </div>                             
-    )
-}
 
 
 const MissionBar = ({ name, points, maxPoints, handleDeleteMission, handleMissionProgress}) => {
@@ -50,7 +11,7 @@ const MissionBar = ({ name, points, maxPoints, handleDeleteMission, handleMissio
         <div className='flex items-stretch gap-2'>
         <ProgressBar label={name} value={points} maxValue={maxPoints} />
         <AddSubtractBtn handleAddPoints={(value) => handleMissionProgress(name, value, 'add')} handleSubtractPoints={(value) => handleMissionProgress(name, value, 'subtract')}/>
-        <i onClick={() => handleDeleteMission(name)} className="fa-solid fa-trash pt-3 pl-2 cursor-pointer text-xl duration-200 hover:text-rose-500"></i> 
+        <i onClick={() => handleDeleteMission(name)} className="pt-3 pl-2 text-xl duration-200 cursor-pointer fa-solid fa-trash hover:text-rose-500"></i> 
     </div>
 
     )
@@ -80,10 +41,10 @@ const MissionInput = ({ handleAddMission }) => {
     }
 
     return(
-        <div className='flex items-stretch divide-x mb-5'>
-            <input type='text' placeholder={'Enter Mission Name'} value={name} onChange={(e) => handleNameChange(e.target.value)} className="outline-none p-3 text-base sm:text-lg text-white bg-slate-700 flex-1" />
-            <input type='text' placeholder={'Enter Time / Mission Points'} value={points} onChange={(e) => handlePointsChange(e.target.value)} className="outline-none p-3 text-base sm:text-lg text-white bg-slate-700 flex-1" />
-            <button onClick={() => handleAddAdvancementClick()} className='w-fit px-4 sm:px-6 py-2 sm:py-3 bg-slate-400 text-white font-medium text-base duration-300 hover:opacity-40'>ADD</button>
+        <div className='flex items-stretch mb-5 divide-x'>
+            <input type='text' placeholder={'Enter Mission Name'} value={name} onChange={(e) => handleNameChange(e.target.value)} className="flex-1 p-3 text-base text-white outline-none sm:text-lg bg-slate-700" />
+            <input type='text' placeholder={'Enter Time / Mission Points'} value={points} onChange={(e) => handlePointsChange(e.target.value)} className="flex-1 p-3 text-base text-white outline-none sm:text-lg bg-slate-700" />
+            <button onClick={() => handleAddAdvancementClick()} className='px-4 py-2 text-base font-medium text-white duration-300 w-fit sm:px-6 sm:py-3 bg-slate-400 hover:opacity-40'>ADD</button>
         </div>
     )
 }

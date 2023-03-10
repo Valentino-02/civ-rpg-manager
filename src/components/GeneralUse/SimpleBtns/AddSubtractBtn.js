@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function AddSubtractBtn ({ type, handleAdd, handleSubtract}) {
+export default function AddSubtractBtn ({ handleAdd, handleSubtract }) {
     const [virtualPoints, setVirtualPoints] = useState('');
   
     const handlepointsChange = (value) => {
@@ -11,20 +11,20 @@ export default function AddSubtractBtn ({ type, handleAdd, handleSubtract}) {
   
     const handleClickAddBtn= () => {
       if (virtualPoints!== '') {
-        handleAdd(type, virtualPoints);
+        handleAdd(virtualPoints);
         setVirtualPoints('');
         return;
       }
-      handleAdd(type, '1');
+      handleAdd('1');
     };
   
     const handleClickSubtractBtn= () => {
       if (virtualPoints!== '') {
-        handleSubtract(type,virtualPoints);
+        handleSubtract(virtualPoints);
         setVirtualPoints('');
         return;
       }
-      handleSubtract(type, '1');
+      handleSubtract('1');
     };
   
     return (

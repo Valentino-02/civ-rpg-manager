@@ -9,93 +9,61 @@ import ProgBarFixedSubtract from '../GeneralUse/ProgressBars/ProgBarFixedSubtrac
 
 
 const Advancements = () => {
-  const {
-    playerData, addAdvancement, deleteAdvancement, setProgressValue,
-  } = usePlayerDataContext();
-
-  const technologies = playerData.technologies ? playerData.technologies : [];
-  const beliefs = playerData.beliefs ? playerData.beliefs : [];
-  const civics = playerData.civics ? playerData.civics : [];
-
-  const techProgress = playerData.progressBars.science ? playerData.progressBars.science : 0;
-  const techMaxValue = playerData.technologies ? 10 + 3 * playerData.technologies.length : 10;
-  const beliefProgress = playerData.progressBars.religion ? playerData.progressBars.religion : 0;
-  const beliefMaxValue = playerData.beliefs ? 10 + 3 * playerData.beliefs.length : 10;
-  const civicProgress = playerData.progressBars.influence ? playerData.progressBars.influence : 0;
-  const civicMaxValue = playerData.civics ? 10 + 3 * playerData.civics.length : 10;
-
   return (
     <>
-      <SectionHeader name={'Technologies'} component={
-        <AdvancementEntryManager
-          advancementList={technologies}
-          type={'technology'}
-          value={techProgress}
-          maxValue={techMaxValue}
-          addAdvancement={addAdvancement}
-          deleteAdvancement={deleteAdvancement}
-          modifyAdvancementValue={setProgressValue} 
-        />} 
-      />
-      <SectionHeader name={'Beliefs'} component={
-        <AdvancementEntryManager
-          advancementList={beliefs}
-          type={'belief'}
-          value={beliefProgress}
-          maxValue={beliefMaxValue}
-          addAdvancement={addAdvancement}
-          deleteAdvancement={deleteAdvancement}
-          modifyAdvancementValue={setProgressValue} 
-        />} 
-      />
-      <SectionHeader name={'Civics'} component={
-        <AdvancementEntryManager
-          advancementList={civics}
-          type={'civic'}
-          value={civicProgress}
-          maxValue={civicMaxValue}
-          addAdvancement={addAdvancement}
-          deleteAdvancement={deleteAdvancement}
-          modifyAdvancementValue={setProgressValue} 
-        />} 
-      />
+      <SectionHeader name={'Technologies'} component={<Advancement type={'science'} />}/>
+      <SectionHeader name={'Beliefs'} component={<Advancement type={'religion'} />}/>
+      <SectionHeader name={'Civics'} component={<Advancement type={'civics'} />}/>
     </>
   );
 }
 
-const Technologies = () => {
+
+const Advancement = ({ type }) => {
   const {
     playerData, addAdvancement, deleteAdvancement, setProgressValue,
   } = usePlayerDataContext();
 
-  const technologies = playerData.technologies ? playerData.technologies : [];
-  const techProgress = playerData.progressBars.science ? playerData.progressBars.science : 0;
-  const techMaxValue = playerData.technologies ? 10 + 3 * playerData.technologies.length : 10;
+  const data = playerData.knowledge[type]
+  const list = data.advancements ? data.advancements : [];
+  const progress =  data.progress ? data.progress : 0;
+  const maxProgress = 10;
 
   return (
-    <AdvancementEntryManager
-      advancementList={technologies}
-      type={'technology'}
-      value={techProgress}
-      maxValue={techMaxValue}
-      addAdvancement={addAdvancement}
-      deleteAdvancement={deleteAdvancement}
-      modifyAdvancementValue={setProgressValue} 
+    <AdvancementRenderer
+      list={list}
+      value={progress}
+      maxValue={maxProgress}
+      addAdvancement={(name, dsc) => addAdvancement(name, dsc, type)}
+      deleteAdvancement={(name) => deleteAdvancement(name, type)}
+      modifyAdvancementValue={(value, operation) => setProgressValue(value, operation, type)} 
     />
   )
 }
 
+// We could merge Advancement and AdvancementRender into one component that manages both the render and the data. 
+// Like we are doing on the Missions or Resources Components
 
-const AdvancementEntryManager = ({ advancementList, type, value, maxValue, addAdvancement, deleteAdvancement, modifyAdvancementValue }) => {
+const AdvancementRenderer = ({ list, value, maxValue, addAdvancement, deleteAdvancement, modifyAdvancementValue }) => {
   return(
     <>
-      <ProgBarFixedSubtract value={value} maxValue={maxValue} type={type} handleModifyValue={(type, value, operation) => modifyAdvancementValue(type, value, operation)} />
-      <AddEntryInputField type={type} handleAddEntry={(name, dsc, type) => addAdvancement(name, dsc, type)} />
-      {advancementList.length !== 0 ? advancementList.map((advancement, index) => (
-        <AddedEntry key={index} name={advancement.name} dsc={advancement.dsc} type={type} handleDeleteEntry={(name, fieldName) => deleteAdvancement(name, fieldName)} />
+      <ProgBarFixedSubtract 
+        value={value}
+        maxValue={maxValue}
+        handleModifyValue={(value, operation) => modifyAdvancementValue(value, operation)} 
+      />
+      <AddEntryInputField handleAddEntry={(name, dsc) => addAdvancement(name, dsc)} />
+      {list.length !== 0 ? list.map((advancement, index) => (
+        <AddedEntry 
+          key={index} 
+          name={advancement.name}
+          dsc={advancement.dsc}
+          handleDeleteEntry={() => deleteAdvancement(advancement.name)} 
+        />
       )) : null}
     </>
   )
 }
+
 
 export default Advancements;

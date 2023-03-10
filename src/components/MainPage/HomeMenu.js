@@ -16,9 +16,9 @@ function HomeMenu() {
       <CenterChildrenDiv>
         <SectionHeader name={'Population Distribution'} component={<PopulationDistribution />}  />
         <SectionHeader name={'Advancements'} component={<Advancements />}  />
-{/*         <SectionHeader name={'Missions'} component={<Missions/>}  /> */}
+        <SectionHeader name={'Missions'} component={<Missions/>}  />
         <SectionHeader name={'Reources'} component={<Resources />}  />
-        <SectionHeader name={'Extra Food'} component={<ExtraFood />}  />
+{/*         <SectionHeader name={'Extra Food'} component={<ExtraFood />}  /> */}
       </CenterChildrenDiv>
     </>
   );

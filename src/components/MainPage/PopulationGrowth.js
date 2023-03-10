@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { usePlayerDataContext } from '../../context/playerDataContext'
+import ProgBarWithBtns from '../GeneralUse/ProgressBars/ProgBarWithBtns'
 import ProgressBar from '../GeneralUse/ProgressBars/ProgressBar'
 
 const AddSubtractBtn = ({ handleAddPoints, handleSubtractPoints, handleAutoSubtractPoints }) => {
@@ -63,7 +64,7 @@ const PopulationBar = ({ points, maxPoints, handlePopulationProgress}) => {
     )
 }
 
-const ExtraFood = () => {
+const PopulationGrowth = () => {
     const { playerData, setFoodProgress, setPopulationProgress } = usePlayerDataContext()
     
     const extraFood = playerData.extraFood ? playerData.extraFood : 0
@@ -72,9 +73,10 @@ const ExtraFood = () => {
     const maxPoints = 10 + (populationSize*5)
 
     return (<>
+        <ProgBarWithBtns />
         <FoodBar points={extraFood} maxPoints={maxPoints} handleFoodProgress={(value, operation) => setFoodProgress(value, operation)} />
         <PopulationBar points={populationSize} maxPoints={10} handlePopulationProgress={(value, operation) => setPopulationProgress(value, operation)} />
   </>)
 }
 
-export default ExtraFood
+export default PopulationGrowth

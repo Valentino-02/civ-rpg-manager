@@ -5,17 +5,20 @@ import { usePlayerDataContext } from '../../context/playerDataContext'
 const LabourDistribution = () => {
     const { playerData, setLabourValue, addLabour, removeLabour } = usePlayerDataContext()
     const [count, setCount] = useState(100)
+    const [startingLabours, setStartingLabours] = useState([])
+    const [extraLabours, setExtraLabours] = useState([])
 
     const labours = playerData.labourDistribution ? playerData.labourDistribution : []
-    const startingLabours = []
-    const extraLabours = []
+
 
     useEffect(() => {
-        startingLabours = labours.filter((labour) => (labour.isExtra === false))
+        let newLabours = labours.filter((labour) => (labour.isExtra === false))
+        setStartingLabours(newLabours)
     }, []) 
     
     useEffect(() => {
-        extraLabours = labours.filter((labour) => (labour.isExtra === true))
+        let newLabours = labours.filter((labour) => (labour.isExtra === true))
+        setExtraLabours(newLabours)
     }, [labours])     
 
     const handleAddPopulation = (name, value, isExtra) => {

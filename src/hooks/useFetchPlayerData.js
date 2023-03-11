@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { useAuth } from '../context/authContext';
 import { db } from '../../firebase';
-import emptyPlayerData from '../utils/emptyPlayerData';
+import emptyPlayerData from '../utils/emptyCivData';
 import { usePlayerDataContext } from '../context/playerDataContext';
 
 export default function useFetchPlayerData() {
@@ -11,6 +11,7 @@ export default function useFetchPlayerData() {
   const { user } = useAuth();
 
   useEffect(() => {
+    console.log('holis')
     fetchData();
   }, []);
 
@@ -26,7 +27,16 @@ export default function useFetchPlayerData() {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
-  return { playerData };
+  return {playerData}
+}
+
+export const fetchPlayerData = async (userId, setPlayerData) => {
+  console.log('holiiii')
+  const playerRef = doc(db, 'players', userId);
+  const playerDoc = await getDoc(playerRef);
+  if (playerDoc.exists()) {
+    setPlayerData(playerDoc.data());
+  } 
 }

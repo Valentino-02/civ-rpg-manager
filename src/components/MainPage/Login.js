@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import React, { useState} from 'react';
 import { doc, setDoc } from 'firebase/firestore';
 import { useAuth } from '../../context/authContext';
 import { db } from '../../../firebase';
 import emptyPlayerData from '../../utils/emptyPlayerData';
-import { usePlayerDataContext } from '../../context/playerDataContext';
+
 
 function Login() {
-  const { playerData } = usePlayerDataContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [playerName, setPlayerName] = useState('');
-  const [civName, setCivName] = useState('');
   const [error, setError] = useState(null);
   const [isLoggingIn, setIsLoggingIn] = useState(true);
 
@@ -22,8 +18,6 @@ function Login() {
 
     await setDoc(playerRef, {
       ...emptyPlayerData,
-      playerName,
-      civName,
     }, { merge: true });
   }
 
@@ -41,17 +35,7 @@ function Login() {
       return;
     }
 
-    if (playerName === 'Diego' || playerName === 'diego') {
-      setError('Diego is a puto name');
-      return;
-    }
-
-    if (playerName === 'Fran' || playerName === 'fran') {
-      setError('Fran is a super puto name');
-      return;
-    }
-
-    if (!email || !password || !civName || !playerName) {
+    if (!email || !password) {
       setError('Please enter all the fields');
       return;
     }
@@ -66,16 +50,12 @@ function Login() {
   }
 
   return (
-    <div className="flex-1 text-xs sm:text-sm flex flex-col justify-center items-center gap-2 sm:gap-4">
-      <h1 className="font-extrabold select-none text-2xl sm:text-4xl uppercase">
+    <div className="flex flex-col items-center justify-center flex-1 gap-2 text-xs sm:text-sm sm:gap-4">
+      <h1 className="text-2xl font-extrabold uppercase select-none sm:text-4xl">
         {isLoggingIn ? 'login' : 'register'}
       </h1>
 
       {error && <div className="w-full max-w-[40ch] border-rose-400 border text-center border-solid text-rose-400 py-2">{error}</div>}
-
-      {!isLoggingIn && <input type="text" value={playerName} onChange={(e) => setPlayerName(e.target.value)} placeholder="Player Name" className="outline-none duration-300 border-b-2 border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]" />}
-
-      {!isLoggingIn && <input type="text" value={civName} onChange={(e) => setCivName(e.target.value)} placeholder="Civilization Name" className="outline-none duration-300 border-b-2 border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]" />}
 
       <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" className="outline-none duration-300 border-b-2 border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]" />
 
@@ -88,7 +68,7 @@ function Login() {
       </button>
 
       <h2
-        className="duration-300 hover:scale-110 cursor-pointer"
+        className="duration-300 cursor-pointer hover:scale-110"
         onClick={() => {
           setIsLoggingIn(!isLoggingIn);
           setError(false);

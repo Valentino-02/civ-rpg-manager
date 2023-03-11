@@ -4,16 +4,16 @@ import { usePlayerDataContext } from '../../context/playerDataContext';
 
 import AddEntryInputField from '../GeneralUse/AddEntryInputField';
 import AddedEntry from '../GeneralUse/AddedEntry';
-import SectionHeader from '../GeneralUse/SectionHeader';
+import SubSectionHeader from '../GeneralUse/SubSectionHeader';
 import ProgBarFixedSubtract from '../GeneralUse/ProgressBars/ProgBarFixedSubtract';
 
 
 const Advancements = () => {
   return (
     <>
-      <SectionHeader name={'Technologies'} component={<Advancement type={'science'} />}/>
-      <SectionHeader name={'Beliefs'} component={<Advancement type={'religion'} />}/>
-      <SectionHeader name={'Civics'} component={<Advancement type={'civics'} />}/>
+      <SubSectionHeader name={'Technologies'} component={<Advancement type={'science'} />}/>
+      <SubSectionHeader name={'Beliefs'} component={<Advancement type={'religion'} />}/>
+      <SubSectionHeader name={'Civics'} component={<Advancement type={'civics'} />}/>
     </>
   );
 }

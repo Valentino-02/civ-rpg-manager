@@ -4,17 +4,13 @@ import {
 } from 'firebase/auth';
 import { auth } from '../../firebase';
 
-const authContext = React.createContext();
-
-export function useAuth() {
-  return useContext(authContext);
-}
+const Context = React.createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  async function signup(email, password) {
+  async function register(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
       .then((userCred) => {
         const { user } = userCred;
@@ -42,7 +38,7 @@ export function AuthProvider({ children }) {
   const value = {
     user,
     login,
-    signup,
+    register,
     logout,
   };
 
@@ -52,3 +48,5 @@ export function AuthProvider({ children }) {
     </authContext.Provider>
   );
 }
+
+export const useAuth = () => useContext(Context)

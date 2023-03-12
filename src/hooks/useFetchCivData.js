@@ -1,31 +1,12 @@
 import { useEffect } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
-import emptyCivData from '../utils/emptyCivData';
 import { usePlayerDataContext } from '../context/playerDataContext';
+import { getCivData } from '../actions/civActions';
 
-export default function useFetchCivData() {
-  const { civData, setCivData } = usePlayerDataContext();
+export default function useFetchCivData(civId) {
+  const { setCivData } = usePlayerDataContext();
 
-  const civUid = ''
-
-  useEffect(() => {
-    fetchData();
+  useEffect(async() => {
+    let civData = await getCivData(civId);
+    setCivData(civData)
   }, []);
-
-  async function fetchData() {
-    try {
-      const civRef = doc(db, 'civilizations', civUid);
-      const civDoc = await getDoc(civRef);
-      if (civDoc.exists()) {
-        setCivData(civDoc.data());
-      } else {
-        setCivData({ emptyCivData });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  return { civData };
 }

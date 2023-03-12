@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import { useEffect } from 'react';
 import CreateCiv from '../components/MainPage/createCiv';
 import HomeMenu from '../components/MainPage/HomeMenu'
 import Login from '../components/MainPage/Login'
@@ -13,12 +12,6 @@ export default function Home() {
 
   const civList = playerData.civList
 
-  const should = user && civList.length === 0
-
-  useEffect(() => {
-    console.log(civList)
-  }, [civList])
-
   return (
     <>
       <Head>
@@ -27,8 +20,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {!user && <Login />}
-      {should ? <CreateCiv/> : null}
-{/*       {user && civList.length > 0 && <HomeMenu/>} */}
+      {(user && civList.length === 0 ) ? <CreateCiv/> : <HomeMenu/>}
     </>
   )
 }

@@ -13,18 +13,13 @@ const CreateCiv = () => {
     const [civName, setCivName] = useState('')
     const civList = playerData.civList
 
-    useEffect(() => {
-        console.log('jjjjjjjjjjj')
-    })
 
     const submitHandler = async () => {
-        console.log('jjjjj')
         if (!civName || !rulerName) {
         setError('Please enter all the fields');
         return;
         }
     
-        console.log('hello')
         await createCiv(user.uid, civName, rulerName, civList)
         fetchPlayerData(user.uid, setPlayerData )
     }

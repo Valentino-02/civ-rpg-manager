@@ -1,8 +1,7 @@
 import React, { useState} from 'react';
-import { doc, setDoc } from 'firebase/firestore';
 import { useAuth } from '../../context/authContext';
-import { db } from '../../../firebase';
-import emptyPlayerData from '../../utils/emptyPlayerData';
+import { createPlayer } from '../../actions/playerActions';
+import useFetchPlayerData from '../../hooks/useFetchPlayerData';
 
 
 function Login() {
@@ -11,15 +10,7 @@ function Login() {
   const [error, setError] = useState(null);
   const [isLoggingIn, setIsLoggingIn] = useState(true);
 
-  const { login, signup } = useAuth();
-
-  async function savePlayerData(uid) {
-    const playerRef = doc(db, 'players', uid);
-
-    await setDoc(playerRef, {
-      ...emptyPlayerData,
-    }, { merge: true });
-  }
+  const { login, register } = useAuth();
 
   async function submitHandler() {
     if (isLoggingIn) {
@@ -45,8 +36,8 @@ function Login() {
       return;
     }
 
-    const userId = await signup(email, password);
-    savePlayerData(userId);
+    const userId = await register(email, password);
+    createPlayer(userId);
   }
 
   return (
@@ -76,7 +67,6 @@ function Login() {
       >
         {!isLoggingIn ? 'Login' : 'Register'}
       </h2>
-
     </div>
   );
 }

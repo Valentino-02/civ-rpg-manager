@@ -5,6 +5,7 @@ import { PlayerDataContext } from '../context/playerDataContext';
 import { ToastContainer } from 'react-toastify'
 import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
+import useFetchPlayerData from '../hooks/useFetchPlayerData';
 
 function MyApp({ Component, pageProps }) {
   return (

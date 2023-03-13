@@ -1,12 +1,14 @@
 import Head from 'next/head'
-import CreateCiv from '../components/MainPage/createCiv';
+import CivCreator from '../components/MainPage/CivCreator';
 import HomeMenu from '../components/MainPage/HomeMenu'
 import Login from '../components/MainPage/Login'
 import { useAuth } from '../context/authContext'
 import { usePlayerDataContext } from '../context/playerDataContext';
+import useFetchPlayerData from '../hooks/useFetchPlayerData';
 
 
 export default function Home() {
+  useFetchPlayerData()
   const { playerData } = usePlayerDataContext();
   const { user } = useAuth()
 
@@ -20,7 +22,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {!user && <Login />}
-      {(user && civList.length === 0 ) ? <CreateCiv/> : <HomeMenu/>}
+      {(user && civList.length === 0 ) ? <CivCreator/> : null}
+      {(user && civList.length > 0 ) ? <HomeMenu/> : null}
     </>
   )
 }

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { createCiv } from '../../actions/civActions'
 import { usePlayerDataContext } from '../../context/playerDataContext';
 import { useAuth } from '../../context/authContext';
-import useFetchPlayerData, { fetchPlayerData } from '../../hooks/useFetchPlayerData';
+import { getPlayerData } from '../../actions/playerActions';
 
-const CreateCiv = () => {
+const CivCreator = () => {
     const { playerData, setPlayerData } = usePlayerDataContext();
     const { user } = useAuth();
 
@@ -21,7 +21,9 @@ const CreateCiv = () => {
         }
     
         await createCiv(user.uid, civName, rulerName, civList)
-        fetchPlayerData(user.uid, setPlayerData )
+
+        let res = await getPlayerData(user.uid)
+        setPlayerData(res)
     }
 
     return (
@@ -45,4 +47,4 @@ const CreateCiv = () => {
     )
 }
 
-export default CreateCiv
+export default CivCreator

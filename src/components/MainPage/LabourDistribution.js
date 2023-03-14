@@ -3,12 +3,12 @@ import { usePlayerDataContext } from '../../context/playerDataContext'
 
 
 const LabourDistribution = () => {
-    const { playerData, setLabourValue, addLabour, removeLabour } = usePlayerDataContext()
+    const { civData, setLabourValue, addLabour, removeLabour } = usePlayerDataContext()
     const [count, setCount] = useState(100)
     const [startingLabours, setStartingLabours] = useState([])
     const [extraLabours, setExtraLabours] = useState([])
 
-    const labours = playerData.labourDistribution ? playerData.labourDistribution : []
+    const labours = civData.labourDistribution ? civData.labourDistribution : []
 
 
     useEffect(() => {

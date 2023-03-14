@@ -25,12 +25,10 @@ const CivCreator = () => {
 
         let playerData = await getPlayerData(user.uid)
         setPlayerData(playerData)
-        console.log('playerData: ' ,playerData)
         
         let currentCivId = findCurrentCivId(playerData.civList)
         let civData = await getCivData(currentCivId)
         setCivData(civData)
-        console.log('civData: ' ,civData)
     }
 
     return (

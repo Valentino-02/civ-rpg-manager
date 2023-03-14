@@ -32,16 +32,4 @@ export const getCivData = async (civId) => {
     return civDoc.data()
 }
 
-export const setCivAsCurrent = async(userId, civId, civList) => {
-    const newCivList = civList.map((element) => (element.civId === civId ? {
-        ...element,
-        isCurrent: true
-    } : {
-        ...element,
-        isCurrent: false
-    }))
-    await setDoc(getPlayerRef(userId), {
-        ...emptyPlayerData,
-        civList: newCivList
-    }, {merge: true})
-}
+

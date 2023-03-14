@@ -5,9 +5,9 @@ import ProgBarDelete from '../GeneralUse/ProgressBars/ProgBarDelete'
 
 
 const Missions = () => {
-    const { playerData, addMission, deleteMission, setMissionProgress } = usePlayerDataContext()
+    const { civData, addMission, deleteMission, setMissionProgress } = usePlayerDataContext()
     
-    const missions = playerData.missions ? playerData.missions : []
+    const missions = civData.missions ? civData.missions : []
 
     return (<>
         <AddEntryInputField 

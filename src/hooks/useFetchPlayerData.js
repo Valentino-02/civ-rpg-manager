@@ -9,15 +9,13 @@ export default function useFetchPlayerData() {
   const { user } = useAuth();
 
   useEffect(() => {
-    tuVieja()
+    if (!user) return
+    getAndSetData()
   }, [user]);
 
-  const tuVieja = async() => {
-    if (user) {
-      let playerData = await getPlayerData(user.uid);
-      console.log(playerData)
-      //setPlayerData(playerData)
-    }
+  const getAndSetData = async() => {
+    let playerData = await getPlayerData(user.uid);
+    setPlayerData(playerData)
   }
 }
 

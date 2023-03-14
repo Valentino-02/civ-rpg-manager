@@ -7,11 +7,21 @@ import PopulationDistribution from './LabourDistribution';
 import Resources from './Resources';
 import CenterChildrenDiv from '../StyleGivers/CenterChildrenDiv';
 import PopulationGrowth from './PopulationGrowth';
+import { usePlayerDataContext } from '../../context/playerDataContext';
+
 
 function HomeMenu() {
+  const {
+    civData, addAdvancement, deleteAdvancement, setProgressValue,
+  } = usePlayerDataContext();
+
+  useEffect(() => {
+    console.log(civData)
+  }, [])
+
   return (
     <>
-    <div>Tu Vieja</div>
+    <div>{civData.civInfo.rulerName} </div>
 {/*       <CenterChildrenDiv>
         <SectionHeader name={'Population Distribution'} component={<PopulationDistribution />}  />
         <SectionHeader name={'Advancements'} component={<Advancements />}  />

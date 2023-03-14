@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { createCiv } from '../../actions/civActions'
+import { createCiv, getCivData } from '../../actions/civActions'
 import { usePlayerDataContext } from '../../context/playerDataContext';
 import { useAuth } from '../../context/authContext';
 import { getPlayerData } from '../../actions/playerActions';
+import { findCurrentCivId } from '../../utils/helperFunctions';
 
 const CivCreator = () => {
-    const { playerData, setPlayerData } = usePlayerDataContext();
+    const { playerData, setPlayerData, setCivData } = usePlayerDataContext();
     const { user } = useAuth();
 
     const [error, setError] = useState(null);
@@ -22,8 +23,14 @@ const CivCreator = () => {
     
         await createCiv(user.uid, civName, rulerName, civList)
 
-        let res = await getPlayerData(user.uid)
-        setPlayerData(res)
+        let playerData = await getPlayerData(user.uid)
+        setPlayerData(playerData)
+        console.log('playerData: ' ,playerData)
+        
+        let currentCivId = findCurrentCivId(playerData.civList)
+        let civData = await getCivData(currentCivId)
+        setCivData(civData)
+        console.log('civData: ' ,civData)
     }
 
     return (

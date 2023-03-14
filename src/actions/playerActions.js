@@ -1,18 +1,30 @@
 
-import { setDoc, doc, getDoc } from "firebase/firestore";
-import { db } from '../../firebase';
+import { setDoc, getDoc } from "firebase/firestore";
+import { getPlayerRef } from "../utils/DBRefs";
 import emptyPlayerData from "../utils/emptyPlayerData";
 
 
 export const createPlayer = async (userId) => {
-    const playerRef = doc(db, 'players', userId);
-    await setDoc(playerRef, {
+    await setDoc(getPlayerRef(userId), {
       ...emptyPlayerData,
     }, { merge: true });
 }
 
 export const getPlayerData = async (userId) => {
-    const playerRef = doc(db, 'players', userId);
-    const playerDoc = await getDoc(playerRef);
+    const playerDoc = await getDoc(getPlayerRef(userId));
     return playerDoc.data()
+}
+
+export const setCivAsCurrent = async(userId, civId, civList) => {
+  const newCivList = civList.map((element) => (element.civId === civId ? {
+      ...element,
+      isCurrent: true
+  } : {
+      ...element,
+      isCurrent: false
+  }))
+  await setDoc(getPlayerRef(userId), {
+      ...emptyPlayerData,
+      civList: newCivList
+  }, {merge: true})
 }

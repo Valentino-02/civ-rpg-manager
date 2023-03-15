@@ -6,9 +6,9 @@ import AddSubtractBtn from '../GeneralUse/SimpleBtns/AddSubtractBtn'
 
 
 const PopulationGrowth = () => {
-    const { playerData, setFoodProgress, setPopulationProgress } = usePlayerDataContext()
+    const { civData, setFoodProgress, setPopulationProgress } = usePlayerDataContext()
     
-    const data = playerData.populationGrowth
+    const data = civData.populationGrowth
     const extraFood = data.progress ? data.progress : 0
     const populationSize = data.populationSize ? data.populationSize: 0
     const maxPoints = 10

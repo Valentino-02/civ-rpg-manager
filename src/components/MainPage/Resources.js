@@ -6,9 +6,9 @@ import AddedEntry from '../GeneralUse/AddedEntry'
 
 
 const Resources = () => {
-    const { playerData, addResource, deleteResource } = usePlayerDataContext()
+    const { civData, addResource, deleteResource } = usePlayerDataContext()
     
-    const resources = playerData.resources ? playerData.resources : []
+    const resources = civData.resources ? civData.resources : []
 
 
     return (<>

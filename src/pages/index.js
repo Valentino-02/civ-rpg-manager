@@ -5,10 +5,12 @@ import Login from '../components/MainPage/Login'
 import { useAuth } from '../context/authContext'
 import { usePlayerDataContext } from '../context/playerDataContext';
 import useFetchPlayerData from '../hooks/useFetchPlayerData';
+import useFetchCivData from '../hooks/useFetchCivData';
 
 
 export default function Home() {
   useFetchPlayerData()
+  useFetchCivData()
   const { playerData } = usePlayerDataContext();
   const { user } = useAuth()
 

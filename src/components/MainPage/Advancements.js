@@ -21,7 +21,7 @@ const Advancements = () => {
 
 const Advancement = ({ type }) => {
   const {
-    civData, playerData, addAdvancement, deleteAdvancement, setProgressValue,
+    civData, addAdvancement, deleteAdvancement, setProgressValue,
   } = usePlayerDataContext();
 
   const data = civData.knowledge[type]

@@ -1,11 +1,13 @@
 const emptyPlayerData = {
     "civList": [
-/*         {
-            "civName": "",
-            "civId": "",
-        }, */
-    ]
+        //emptyCivListItem,
+    ],
+}
 
+export const emptyCivListItem = {
+    "civName": "",
+    "civId": "",
+    "isCurrent": false,
 }
 
 export default emptyPlayerData

@@ -1,6 +1,6 @@
 
-import { collection, addDoc, setDoc, doc, getDoc } from "firebase/firestore";
-import { db } from '../../firebase';
+import { addDoc, setDoc, getDoc } from "firebase/firestore";
+import { civCollRef, getCivRef, getPlayerRef } from "../utils/DBRefs";
 import emptyCivData from "../utils/emptyCivData"; 
 import emptyPlayerData from "../utils/emptyPlayerData";
 
@@ -33,9 +33,6 @@ const modifyCivArray = (civArrayKey, itemName, newItemValue) => {
 }
 
 export const createCiv = async (userId, civName, rulerName, civList) => {
-    const civCollRef = collection(db, 'civilizations');
-    const playerRef = doc(db, 'players', userId)
-    
     const newCivInfo = {
         rulerName: rulerName,
         civName: civName
@@ -45,17 +42,20 @@ export const createCiv = async (userId, civName, rulerName, civList) => {
       civInfo: newCivInfo
     });
     const civId = docData.id
-    const newCivList = [...civList, {civName, civId}]
+    const civListWithNoCurrent = civList.map((element) => ({
+        ...element,
+        isCurrent:false
+    }))
+    const newCivList = [...civListWithNoCurrent, {...emptyCivListItem, civName, civId, isCurrent:true}]
 
-    await setDoc(playerRef, {
+    await setDoc(getPlayerRef(userId), {
         ...emptyPlayerData,
         civList: newCivList
     }, {merge: true})
 }
 
 export const getCivData = async (civId) => {
-    const civRef = doc(db, 'civilizations', civId);
-    const civDoc = await getDoc(civRef)
+    const civDoc = await getDoc(getCivRef(civId))
     return civDoc.data()
 }
 

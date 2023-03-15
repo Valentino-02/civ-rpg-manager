@@ -21,10 +21,10 @@ const Advancements = () => {
 
 const Advancement = ({ type }) => {
   const {
-    playerData, addAdvancement, deleteAdvancement, setProgressValue,
+    civData, playerData, addAdvancement, deleteAdvancement, setProgressValue,
   } = usePlayerDataContext();
 
-  const data = playerData.knowledge[type]
+  const data = civData.knowledge[type]
   const list = data.advancements ? data.advancements : [];
   const progress =  data.progress ? data.progress : 0;
   const maxProgress = 10;

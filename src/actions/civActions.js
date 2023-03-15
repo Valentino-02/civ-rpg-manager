@@ -1,15 +1,16 @@
 
 import { addDoc, setDoc, getDoc } from "firebase/firestore";
 import { civCollRef, getCivRef, getPlayerRef } from "../utils/DBRefs";
-import emptyCivData from "../utils/emptyCivData"; 
-import emptyPlayerData from "../utils/emptyPlayerData";
+import emptyCivData from "../utils/emptyCivData";
+import emptyPlayerData, { emptyCivListItem } from "../utils/emptyPlayerData";
 
-export const addCivArrItem = (civArrayPath, civArrayKey, itemValue) => {
+const addCivArrItem = (civArrayPath, civArrayKey, itemValue) => {
     let values = [...civArrayPath[civArrayKey]]
     values.push(itemValue)
     setCivData((prevState) => {
-        let oldCivData = {...prevState}
+        let newCivData = {...prevState}
         civArrayPath[civArrayKey] = values
+        return newCivData
     })
 }
 
@@ -26,10 +27,12 @@ const modifyCivArray = (civArrayKey, itemName, newItemValue) => {
     let modifiedArray = [...civArrayKey]
     let index = modifiedArray.findIndex((item) => item.name === itemName)
     modifiedArray[index] = newItemValue
-    setCivData((prevState) => ({
-        ...prevState,
-        civArrayKey: modifiedArray
-    }))
+    setCivData((prevState) => {
+        let newCivData = {...prevState}
+        civArrayKey = modifiedArray
+        return newCivData
+        }
+    )
 }
 
 export const createCiv = async (userId, civName, rulerName, civList) => {
@@ -60,12 +63,20 @@ export const getCivData = async (civId) => {
 }
 
 export const setCivProgress = (civDataValue, delta) => {
-    let progressValue = [...civDataValue[progress]]
+    let progressValue = [...civDataValue['progress']]
     let newValue = progressValue + delta
-    setPlayerData((prevState) => ({
-        ...prevState,
-        progress: newValue
-    }))
+    setPlayerData((prevState) => {
+        let newCivData = {...prevState}
+        progress = newValue
+        return newCivData
+    })
 }
 
+export const addAdvancement = (name, dsc, type) => {
+    addCivArrItem(civData.knowledge[type], "advancements", {'name': name, 'dsc': dsc})
+}
+
+export const deleteAdvancement = (name, type) => {
+    removeCivArrItem(civData.knowledge[type], "advancements", name)
+}
 

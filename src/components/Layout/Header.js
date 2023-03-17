@@ -5,6 +5,7 @@ import { usePlayerDataContext } from '../../context/playerDataContext';
 import { auth, db } from '../../../firebase';
 import showMessage from '../../utils/showMessage';
 import { signOut } from '@firebase/auth';
+import Link from 'next/link';
 
 
 export default function Header() {
@@ -32,10 +33,16 @@ export default function Header() {
         {user &&
         <>
           <div className="flex flex-col items-center justify-center col-span-3 col-start-2 gap-2 my-2 text-xs sm:text-sm sm:gap-4">
-            <h1 className="text-2xl font-extrabold select-none sm:text-4xl">{`Welcome ${rulerName}`}</h1>
-            <h1 className="font-extrabold select-none text-1xl sm:text-3xl">{`Great leader of ${civName}`}</h1>
+            <h1 className="font-extrabold select-none text-1xl sm:text-2xl">{`${rulerName}`}</h1>
+            <h1 className="font-extrabold select-none text-1xl sm:text-2xl">{`Great leader of ${civName}`}</h1>
           </div>
-          <div className="grid items-center grid-cols-2 col-start-5 gap-8 mr-4">
+          <div className="grid items-center grid-cols-4 gap-8 mr-4">
+            <Link href={'/'} >
+            <i className="text-xl transition duration-500 cursor-pointer hover:text-cyan-300 sm:text-3xl fa-solid fa-home"/>
+            </Link>
+            <Link href={'/profile'} >
+              <i className="text-xl transition duration-500 cursor-pointer hover:text-cyan-300 sm:text-3xl fa-solid fa-user"/>
+            </Link>
             <i onClick={() => handleSave()} className="text-xl transition duration-500 cursor-pointer fa-solid fa-floppy-disk hover:text-cyan-300 sm:text-3xl" />
             <i onClick={() => signOut(auth)} className="text-xl transition duration-500 cursor-pointer fa-solid fa-right-from-bracket hover:text-cyan-300 sm:text-3xl" />
           </div>

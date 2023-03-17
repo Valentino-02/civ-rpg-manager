@@ -13,7 +13,7 @@ function HomeMenu() {
   return (
     <>
       <CenterChildrenDiv>
-        <SectionHeader name={'labour Distribution'} component={<LabourDistribution />}  />
+        <SectionHeader name={'Labour Distribution'} component={<LabourDistribution />}  />
         <SectionHeader name={'Advancements'} component={<Advancements />}  />
         <SectionHeader name={'Missions'} component={<Missions/>}  />
         <SectionHeader name={'Reources'} component={<Resources />}  />

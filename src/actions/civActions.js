@@ -1,7 +1,7 @@
 
 import { addDoc, setDoc, getDoc } from "firebase/firestore";
 import { civCollRef, getCivRef, getPlayerRef } from "../utils/DBRefs";
-import emptyCivData from "../utils/emptyCivData"; 
+import emptyCivData from "../utils/emptyCivData";
 import emptyPlayerData, { emptyCivListItem } from "../utils/emptyPlayerData";
 
 
@@ -31,5 +31,3 @@ export const getCivData = async (civId) => {
     const civDoc = await getDoc(getCivRef(civId))
     return civDoc.data()
 }
-
-

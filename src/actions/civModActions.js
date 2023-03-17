@@ -1,16 +1,16 @@
 import React from "react"
+import { getObjectProperty, getUpdatedObject } from "../utils/helperFunctions"
 
-const addCivArrItem = (civArray, itemValue) => {
-  let values = [...civArray]
-  values.push(itemValue)
+const addCivArrItem = (path, newValue) => {
   setCivData((prevState) => {
-      let newCivData = {...prevState}
-      civArray = values
-      return newCivData
+    let oldArray = getObjectProperty(prevState, path)
+    oldArray.push(newValue)
+    let newState = getUpdatedObject(prevState, path, oldArray)
+    return newState
   })
 }
 
-const removeCivArrItem = (civArray, itemName) => {
+const removeCivArrItem = (civArray, itemName, setCivData) => {
   let values = [...civArray]
   values = values.filter(item => item.name !== itemName)
   setCivData((prevState) => {

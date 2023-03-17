@@ -4,12 +4,30 @@ export const findCurrentCivId = (civList) => {
     return currentCiv.civId
 }
 
-export const getNewNestedObject = (obj, path, newValue) => {
+export const getUpdatedObject = (obj, path, newValue) => {
+    let pathArray = path.split('.')
     let deepClone = JSON.parse(JSON.stringify(obj))
+    if (pathArray.length === 1) {
+        deepClone[path] = newValue
+        return deepClone
+    }
     let shallowClone = {...deepClone}
-    path.forEach((element) => {
+    pathArray.forEach((element, index) => {
+        if (index === (pathArray.length -1)) {
+            shallowClone[element] = newValue
+            return
+        }
         shallowClone = shallowClone[element]
     });
-    shallowClone.push(newValue)
     return deepClone
+}
+
+export const getObjectProperty = (obj, path) => {
+    let pathArray = path.split('.')
+    let deepClone = JSON.parse(JSON.stringify(obj))
+    let shallowClone = {...deepClone}
+    pathArray.forEach((element) => {
+        shallowClone = shallowClone[element]
+    });
+    return shallowClone 
 }

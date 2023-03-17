@@ -5,7 +5,7 @@ import ProgBarDelete from '../GeneralUse/ProgressBars/ProgBarDelete'
 
 
 const Missions = () => {
-    const { civData, addMission, deleteMission, setMissionProgress } = usePlayerDataContext()
+    const { civData, pushCivProp, filterCivProp, setCivProp } = usePlayerDataContext()
     
     const missions = civData.missions ? civData.missions : []
 
@@ -13,17 +13,17 @@ const Missions = () => {
         <AddEntryInputField 
             nameLabel='Mission Name'
             dscLabel='Time / Mission Points'
-            handleAddEntry={(name, dsc) => addMission(name, dsc)}
+            handleAddEntry={(name, maxProgress) => pushCivProp('missions', {name, maxProgress: Number(maxProgress), progress: 0})}
         />
 
         {missions.length !== 0 ? missions.map((mission, index) => (
             <ProgBarDelete 
                 key={index} 
                 progressBarLabel={mission.name}
-                points={mission.progress}
-                maxPoints={mission.maxProgress}
-                handleDelete={() => deleteMission(mission.name)}
-                handleModifyValue={(value, operation) => setMissionProgress(mission.name, value, operation)} 
+                value={mission.progress}
+                maxValue={mission.maxProgress}
+                handleDelete={() => filterCivProp('missions', mission.name)}
+                handleModifyValue={(value) => setCivProp(`missions.${index}.progress`, value)} 
             />
         )) : null} 
   </>)

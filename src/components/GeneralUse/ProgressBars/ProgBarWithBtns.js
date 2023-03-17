@@ -8,8 +8,8 @@ const ProgBarWithBtns = ({value, maxValue, handleModifyValue, extraBtns=[], prog
     <div className="flex items-stretch gap-2">
       <ProgressBar value={value} maxValue={maxValue} label={progressBarLabel} />
       <AddSubtractBtn 
-        handleAdd={(value) => handleModifyValue(value, 'add')} 
-        handleSubtract={(value) => handleModifyValue(value, 'subtract')} 
+        handleAdd={(virtualValue) => handleModifyValue(virtualValue + value)} 
+        handleSubtract={(virtualValue) => handleModifyValue(value - virtualValue)} 
       />
       {extraBtns.length !== 0 ? extraBtns.map((btn) => (btn)) : null }
     </div>

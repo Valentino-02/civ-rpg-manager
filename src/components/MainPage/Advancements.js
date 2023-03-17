@@ -21,7 +21,7 @@ const Advancements = () => {
 
 const Advancement = ({ type }) => {
   const {
-    civData, addAdvancement, deleteAdvancement, setProgressValue,
+    civData, pushCivProp, filterCivProp, setCivProp,
   } = usePlayerDataContext();
 
   const data = civData.knowledge[type]
@@ -34,9 +34,9 @@ const Advancement = ({ type }) => {
       list={list}
       value={progress}
       maxValue={maxProgress}
-      addAdvancement={(name, dsc) => addAdvancement(name, dsc, type)}
-      deleteAdvancement={(name) => deleteAdvancement(name, type)}
-      modifyAdvancementValue={(value, operation) => setProgressValue(value, operation, type)} 
+      addAdvancement={(name, dsc) => pushCivProp(`knowledge.${type}.advancements`, {name, dsc})}
+      deleteAdvancement={(name) => filterCivProp(`knowledge.${type}.advancements`, name)}
+      modifyAdvancementValue={(value) => setCivProp(`knowledge.${type}.progress`, value)} 
     />
   )
 }
@@ -50,7 +50,7 @@ const AdvancementRenderer = ({ list, value, maxValue, addAdvancement, deleteAdva
       <ProgBarFixedSubtract 
         value={value}
         maxValue={maxValue}
-        handleModifyValue={(value, operation) => modifyAdvancementValue(value, operation)} 
+        handleModifyValue={(value) => modifyAdvancementValue(value)} 
       />
       <AddEntryInputField handleAddEntry={(name, dsc) => addAdvancement(name, dsc)} />
       {list.length !== 0 ? list.map((advancement, index) => (

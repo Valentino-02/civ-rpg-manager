@@ -6,7 +6,7 @@ import AddSubtractBtn from '../GeneralUse/SimpleBtns/AddSubtractBtn'
 
 
 const PopulationGrowth = () => {
-    const { civData, setFoodProgress, setPopulationProgress } = usePlayerDataContext()
+    const { civData, setCivProp } = usePlayerDataContext()
     
     const data = civData.populationGrowth
     const extraFood = data.progress ? data.progress : 0
@@ -18,12 +18,12 @@ const PopulationGrowth = () => {
             <ProgBarWithBtns 
                 value={extraFood} 
                 maxValue={maxPoints} 
-                handleModifyValue={(value, operation) => setFoodProgress(value, operation)}
+                handleModifyValue={(value) => setCivProp('populationGrowth.progress', value)}
                 progressBarLabel={'Extra Food'}
             />
             <PopulationSize 
                 name={getPopulationSizeTag(populationSize)}
-                handleModifyValue={(value, operation) => setPopulationProgress(value, operation)}
+                handleModifyValue={(value) => setCivProp('populationGrowth.populationSize', (populationSize + value))}
             />
         </>
   )
@@ -35,8 +35,8 @@ const PopulationSize = ({ name, handleModifyValue }) => {
         <div className="flex items-stretch gap-2">
             <span className="text-base font-medium text-white select-none">{name}</span>
             <AddSubtractBtn
-                handleAdd={(value) => handleModifyValue(value, 'add')} 
-                handleSubtract={(value) => handleModifyValue(value, 'subtract')} 
+                handleAdd={(value) => handleModifyValue(value)} 
+                handleSubtract={(value) => handleModifyValue(-value)} 
             />
         </div>
     )

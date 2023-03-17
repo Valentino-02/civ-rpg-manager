@@ -1,8 +1,7 @@
-import { stringify } from 'postcss';
 import React, { createContext, useContext, useState } from 'react';
 import emptyCivData from '../utils/emptyCivData';
 import emptyPlayerData from '../utils/emptyPlayerData';
-import { getNewNestedObject } from '../utils/helperFunctions';
+import { getObjectProperty, getUpdatedObject } from '../utils/helperFunctions';
 
 const Context = createContext();
 
@@ -10,43 +9,33 @@ export const PlayerDataContext = ({ children }) => {
     const [ civData, setCivData ] = useState(emptyCivData)
     const [ playerData, setPlayerData ] = useState(emptyPlayerData)
 
-    const addCivArrItem = (path, newValue) => {
-        setCivData((prevState) => getNewNestedObject(prevState, path, newValue))
+    const pushCivProp = (path, newValue) => {
+        let oldArray = getObjectProperty(civData, path)
+        oldArray.push(newValue)
+        let newState = getUpdatedObject(civData, path, oldArray)
+        setCivData(newState)
     }
 
-    const removeCivArrItem = (civArrayPath, civArrayKey, itemName) => {
-        let values = [...civArrayPath[civArrayKey]]
-        values = values.filter(item => item.name !== itemName)
-        setCivData((prevState) => {
-            let newCivData = {...prevState}
-            console.log(newCivData, "holisss")
-            civArrayPath[civArrayKey] = values
-            console.log(newCivData, "holi")
-            return newCivData
-        })
-      }
+    const filterCivProp = (path, id, idLabel='name') => {
+    let oldArray = getObjectProperty(civData, path)
+    let oldArray2 = oldArray.filter((element) => element[idLabel] !== id)
+    let newState = getUpdatedObject(civData, path, oldArray2)
+    setCivData(newState)
+    }
 
-    const addAdvancement = (name, dsc, type) => {
-        setCivData((prevState) => getNewNestedObject(
-            prevState, 
-            ["knowledge", type, "advancements"], 
-            {'name': name, 'dsc': dsc} 
-        ))
-}
-
-    const deleteAdvancement = (name, type) => {
-        removeCivArrItem(civData.knowledge[type], "advancements", name)
-
-      }
-      
-
+    const setCivProp = (path, newValue) => setCivData(getUpdatedObject(civData, path, newValue))
+    
+    const getCivProp = (path) => getObjectProperty(civData, path)
+    
     const value = {
         civData,
         setCivData,
         playerData, 
         setPlayerData,
-        addAdvancement,
-        deleteAdvancement,
+        pushCivProp,
+        filterCivProp,
+        setCivProp,
+        getCivProp,
       }
 
     return (

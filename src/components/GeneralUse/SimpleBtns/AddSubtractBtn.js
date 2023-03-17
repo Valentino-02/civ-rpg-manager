@@ -11,20 +11,20 @@ export default function AddSubtractBtn ({ handleAdd, handleSubtract }) {
   
     const handleClickAddBtn= () => {
       if (virtualPoints!== '') {
-        handleAdd(virtualPoints);
+        handleAdd(Number(virtualPoints));
         setVirtualPoints('');
         return;
       }
-      handleAdd('1');
+      handleAdd(1);
     };
   
     const handleClickSubtractBtn= () => {
       if (virtualPoints!== '') {
-        handleSubtract(virtualPoints);
+        handleSubtract(Number(virtualPoints));
         setVirtualPoints('');
         return;
       }
-      handleSubtract('1');
+      handleSubtract(1);
     };
   
     return (

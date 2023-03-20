@@ -16,8 +16,8 @@ function HomeMenu() {
         <SectionHeader name={'Labour Distribution'} component={<LabourDistribution />}  />
         <SectionHeader name={'Advancements'} component={<Advancements />}  />
         <SectionHeader name={'Missions'} component={<Missions/>}  />
-        <SectionHeader name={'Reources'} component={<Resources />}  />
-        <SectionHeader name={'population Growth'} component={<PopulationGrowth />}  />
+        <SectionHeader name={'Available Resources'} component={<Resources />}  />
+        <SectionHeader name={'Population Growth'} component={<PopulationGrowth />}  />
       </CenterChildrenDiv>
     </>
   );

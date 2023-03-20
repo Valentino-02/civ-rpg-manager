@@ -5,30 +5,21 @@ import { usePlayerDataContext } from '../../context/playerDataContext'
 const LabourDistribution = () => {
     const { civData, pushCivProp, filterCivProp, setCivProp } = usePlayerDataContext()
     const [count, setCount] = useState(100)
-    const [startingLabours, setStartingLabours] = useState([])
-    const [extraLabours, setExtraLabours] = useState([])
 
     const labours = civData.labourDistribution ? civData.labourDistribution : []
-
-    useEffect(() => {
-        let newStartingLabours = labours.filter((labour) => (labour.isExtra !== true))
-        let newExtraLabours = labours.filter((labour) => (labour.isExtra === true))
-        setExtraLabours(newExtraLabours)
-        setStartingLabours(newStartingLabours)
-    }, [labours])     
-
+  
     const handleAddPopulation = (name, value) => {
-        if (count >= 100 || value >= 100) {return}
-        setCount(count + 5)
+        if (count >= 100) {return}
         let index = labours.findIndex((element) => element.name === name)
         setCivProp(`labourDistribution.${index}.value`, value + 5)
+        setCount(c => c + 5)
     }
 
     const handleSubtractPopulation = (name, value) => {
         if (count <= 0 || value <= 0) {return}
-        setCount(count - 5)
         let index = labours.findIndex((element) => element.name === name)
         setCivProp(`labourDistribution.${index}.value`, value - 5)
+        setCount(c => c - 5)
     }
 
     const handleDeleteLabour = (name, value) => {
@@ -43,40 +34,31 @@ const LabourDistribution = () => {
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-            {startingLabours.length !== 0 ? startingLabours.map((labour, index) => (
-                <InfoBox key={index} name={labour.name} value={labour.value} handleAddPopulation={handleAddPopulation} handleSubtractPopulation={handleSubtractPopulation} />
-            )) : null}
-            {extraLabours.length !== 0 ? extraLabours.map((labour, index) => (
-                <DeletableInfoBox key={index} name={labour.name} value={labour.value} handleAddPopulation={handleAddPopulation} handleSubtractPopulation={handleSubtractPopulation} handleDeleteLabour={handleDeleteLabour} />
-            )) : null}
-            <AddLabourBox handleAddLabour={(labourName) => pushCivProp('labourDistribution', {name: labourName, value: 0, isExtra: true})} />
+            {labours.map((labour, index) => (
+                <DeletableInfoBox 
+                    key={index}
+                    name={labour.name}
+                    value={labour.value}
+                    isExtra={labour.isExtra}
+                    handleAddPopulation={handleAddPopulation}
+                    handleSubtractPopulation={handleSubtractPopulation}
+                    handleDeleteLabour={handleDeleteLabour}
+                />
+            ))}
+            <AddLabourBox
+            handleAddLabour={(labourName) => pushCivProp('labourDistribution', {name: labourName, value: 0, isExtra: true})}
+            />
         </div>
     </>)
 }
 
-
-const InfoBox = ({ name, value, handleAddPopulation, handleSubtractPopulation }) => {
-    return (
-        <div className='static flex p-2 border border-white border-solid bg-sky-800'>
-            <h1 className='flex-auto select-none sm:pr-4 text-1xl sm:text-2xl'>
-                {name}
-            </h1>
-            <div className='static flex right-2'>
-                <i onClick={() => handleAddPopulation(name, value)} className="pt-1 text-xl duration-200 cursor-pointer fa-solid fa-plus hover:text-cyan-300"></i>
-                <h1 className={'px-1 sm:px-2 pt-1 text-xl select-none'} >{value}</h1>
-                <i onClick={() => handleSubtractPopulation(name, value) } className="pt-1 text-xl duration-200 cursor-pointer fa-solid fa-minus hover:text-cyan-300"></i>
-            </div>
-        </div>
-    )
-}
-
-const DeletableInfoBox = ({ name, value, handleAddPopulation, handleSubtractPopulation, handleDeleteLabour }) => {
+const DeletableInfoBox = ({ name, value, handleAddPopulation, handleSubtractPopulation, handleDeleteLabour, isExtra }) => {
     return (
         <div className='static flex p-2 border border-white border-solid bg-sky-900'>
-            <h1 className='flex-auto select-none sm:pr-4 text-1xl sm:text-2xl'>
+            {isExtra && <i onClick={() => handleDeleteLabour(name, value)} className="pt-1 text-xl duration-200 cursor-pointer fa-solid fa-trash hover:text-rose-500"></i>}
+            <h1 className='capitalize flex flex-auto select-none pl-1 sm:pr-4 text-1xl sm:text-2xl'>
                 {name}
             </h1>
-            <i onClick={() => handleDeleteLabour(name, value)} className="pt-1 text-xl duration-200 cursor-pointer fa-solid fa-trash hover:text-rose-500"></i>
             <div className='static flex right-2'>
                 <i onClick={() => handleAddPopulation(name, value, true)} className="pt-1 text-xl duration-200 cursor-pointer fa-solid fa-plus hover:text-cyan-300"></i>
                 <h1 className={'px-1 sm:px-2 pt-1 text-xl select-none'} >{value}</h1>

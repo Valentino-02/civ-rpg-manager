@@ -28,7 +28,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="fixed sticky top-0 left-0 grid items-center w-full grid-cols-5 p-1 border-b border-white border-solid bg-inherit justify-items-center">
+      <div className="fixed sticky top-0 left-0 grid items-center w-full grid-cols-5 p-1 border-b border-white border-solid bg-inherit justify-items-center z-10">
         <h1 className="text-2xl select-none sm:text-3xl">Civ RPG Manager</h1>
         {user &&
         <>

@@ -30,7 +30,7 @@ const LabourDistribution = () => {
     return (<>
         <div className='static flex flex-row p-2 border border-white border-solid lg:mx-80'>
             <h1 className='flex-auto select-none sm:pr-4 text-1xl sm:text-2xl'>Idle Population</h1>
-            <h1 className={'px-1 right-2 sm:px-2 pt-1 text-xl select-none'}>{100 - count}</h1>
+            <h1 className={'px-1 right-2 sm:px-2 pt-1 text-xl select-none ' + (count != 100 ? 'text-red-700' : '')}>{100 - count}</h1>
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
@@ -54,7 +54,7 @@ const LabourDistribution = () => {
 
 const DeletableInfoBox = ({ name, value, handleAddPopulation, handleSubtractPopulation, handleDeleteLabour, isExtra }) => {
     return (
-        <div className='static flex p-2 border border-white border-solid bg-sky-900'>
+        <div className='static flex p-2 border border-white border-solid bg-sky-900/50'>
             {isExtra && <i onClick={() => handleDeleteLabour(name, value)} className="pt-1 text-xl duration-200 cursor-pointer fa-solid fa-trash hover:text-rose-500"></i>}
             <h1 className='capitalize flex flex-auto select-none pl-1 sm:pr-4 text-1xl sm:text-2xl'>
                 {name}
